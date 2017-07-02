@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<meta name="theme-color" content="#eeeeee">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="mobile-web-app-capable" content="yes">
+<html>
+<head>
+<title>メンバー</title>
+<link rel="shortcut icon" href="/static/favicon.ico"/>
+<link rel="bookmark" href="/static/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/static/pwa-group.css" />
+<script type="text/javascript">
+var scrolldelay;
+var state;
+function statusCheck(){
+	if(history.state!=null)
+	{
+		if(history.state.group=="nogizaka")
+		{
+			nogiTab();
+		}
+		else if(history.state.group=="keyakizaka")
+		{
+			keyakiTab();
+		}
+	}
+}
+function pageScroll(){
+	if(document.documentElement.scrollTop+document.body.scrollTop==0){
+		clearTimeout(scrolldelay);
+	}
+	else{
+		window.scrollBy(0,-70);
+		scrolldelay=setTimeout('pageScroll()',10);
+	}
+}
+function nogiTab(){
+	document.getElementById("nogimember").style.display="block";
+	document.getElementById("keyakimember").style.display="none";
+	document.getElementById("nogi").style.color="#9E00A5";
+	document.getElementById("keyaki").style.color="#BEBEBE";
+	document.getElementById("line-nogi").style.visibility="visible";
+	document.getElementById("line-keyaki").style.visibility="hidden";
+	history.replaceState({"group":"nogizaka"}, null, null);
+}
+function keyakiTab(){
+	document.getElementById("nogimember").style.display="none";
+	document.getElementById("keyakimember").style.display="block";
+	document.getElementById("nogi").style.color="#BEBEBE";
+	document.getElementById("keyaki").style.color="#A0D468";
+	document.getElementById("line-nogi").style.visibility="hidden";
+	document.getElementById("line-keyaki").style.visibility="visible";
+	history.replaceState({"group":"keyakizaka"}, null, null);
+}
+function touch(){
+	var startx;
+	var starty;
+	var endx;
+	var endy;
+	var el=document.getElementById('list');
+	function cons(){
+		if(Math.abs(starty-endy)<80)
+		{
+			if(startx-endx>80){
+				keyakiTab();
+			}
+			else if(endx-startx>80){
+				nogiTab();
+			}
+		}
+	}
+	el.addEventListener('touchstart',function(e){
+		startx = e.targetTouches[0].pageX;
+		starty = e.targetTouches[0].pageY;
+	});
+	el.addEventListener('touchend',function(e){
+		endx = e.changedTouches[0].pageX;
+		endy = e.changedTouches[0].pageY;
+		cons();
+	});
+}
+function start2do()
+{
+	touch();
+	statusCheck();
+}
+function docReady(cb) {
+	if (document.readyState != 'loading')
+	{
+		cb();
+	}
+	else
+	{
+		document.addEventListener('DOMContentLoaded', cb);
+	}
+}
+docReady(start2do);
+</script>
+</head>
+<body>
+<div id="topbar">
+	<div id="titlebar" onclick="pageScroll();">
+		<div id="back" onclick="event.cancelBubble = true;javascript:history.back(-1);"></div>
+		<div id="title">メンバー</div>
+	</div>	
+	<div id="tabbar">
+		<div class="tab" id="nogi" onclick="nogiTab()">
+			NOGIZAKA46
+			<div id="line-nogi"></div>
+		</div>
+		<div class="tab" id="keyaki" onclick="keyakiTab()">
+			KEYAKIZAKA46
+			<div id="line-keyaki"></div>
+		</div>		
+	</div>
+</div>
+<div id="list">
+<div id="nogimember">
+<div class="member" onclick="window.location.href='/akimoto-manatsu'">
+	<div class="avatar" style="background-image:url(/avatar/akimoto-manatsu.jpg)"></div>
+	<div class="name">秋元真夏</div>
+	<div class="rome">akimoto manatsu</div>
+</div>
+<div class="member" onclick="window.location.href='/ikuta-erika'">
+	<div class="avatar" style="background-image:url(/avatar/ikuta-erika.jpg)"></div>
+	<div class="name">生田絵梨花</div>
+	<div class="rome">ikuta erika</div>
+</div>
+<div class="member" onclick="window.location.href='/ikoma-rina'">
+	<div class="avatar" style="background-image:url(/avatar/ikoma-rina.jpg)"></div>
+	<div class="name">生駒里奈</div>
+	<div class="rome">ikoma rina</div>
+</div>
+<div class="member" onclick="window.location.href='/itou-karin'">
+	<div class="avatar" style="background-image:url(/avatar/itou-karin.jpg)"></div>
+	<div class="name">伊藤かりん</div>
+	<div class="rome">itou karin</div>
+</div>
+<div class="member" onclick="window.location.href='/itou-junna'">
+	<div class="avatar" style="background-image:url(/avatar/itou-junna.jpg)"></div>
+	<div class="name">伊藤純奈</div>
+	<div class="rome">itou junna</div>
+</div>
+<div class="member" onclick="window.location.href='/itou-marika'">
+	<div class="avatar" style="background-image:url(/avatar/itou-marika.jpg)"></div>
+	<div class="name">伊藤万理華</div>
+	<div class="rome">itou marika</div>
+</div>
+<div class="member" onclick="window.location.href='/inoue-sayuri'">
+	<div class="avatar" style="background-image:url(/avatar/inoue-sayuri.jpg)"></div>
+	<div class="name">井上小百合</div>
+	<div class="rome">inoue sayuri</div>
+</div>
+<div class="member" onclick="window.location.href='/etou-misa'">
+	<div class="avatar" style="background-image:url(/avatar/etou-misa.jpg)"></div>
+	<div class="name">衛藤美彩</div>
+	<div class="rome">etou misa</div>
+</div>
+<div class="member" onclick="window.location.href='/kawago-hina'">
+	<div class="avatar" style="background-image:url(/avatar/kawago-hina.jpg)"></div>
+	<div class="name">川後陽菜</div>
+	<div class="rome">kawago hina</div>
+</div>
+<div class="member" onclick="window.location.href='/kawamura-mahiro'">
+	<div class="avatar" style="background-image:url(/avatar/kawamura-mahiro.jpg)"></div>
+	<div class="name">川村真洋</div>
+	<div class="rome">kawamura mahiro</div>
+</div>
+<div class="member" onclick="window.location.href='/kitano-hinako'">
+	<div class="avatar" style="background-image:url(/avatar/kitano-hinako.jpg)"></div>
+	<div class="name">北野日奈子</div>
+	<div class="rome">kitano hinako</div>
+</div>
+<div class="member" onclick="window.location.href='/saitou-asuka'">
+	<div class="avatar" style="background-image:url(/avatar/saitou-asuka.jpg)"></div>
+	<div class="name">齋藤飛鳥</div>
+	<div class="rome">saitou asuka</div>
+</div>
+<div class="member" onclick="window.location.href='/saitou-chiharu'">
+	<div class="avatar" style="background-image:url(/avatar/saitou-chiharu.jpg)"></div>
+	<div class="name">斎藤ちはる</div>
+	<div class="rome">saitou chiharu</div>
+</div>
+<div class="member" onclick="window.location.href='/saitou-yuuri'">
+	<div class="avatar" style="background-image:url(/avatar/saitou-yuuri.jpg)"></div>
+	<div class="name">斉藤優里</div>
+	<div class="rome">saitou yuuri</div>
+</div>
+<div class="member" onclick="window.location.href='/sagara-iori'">
+	<div class="avatar" style="background-image:url(/avatar/sagara-iori.jpg)"></div>
+	<div class="name">相楽伊織</div>
+	<div class="rome">sagara iori</div>
+</div>
+<div class="member" onclick="window.location.href='/sakurai-reika'">
+	<div class="avatar" style="background-image:url(/avatar/sakurai-reika.jpg)"></div>
+	<div class="name">桜井玲香</div>
+	<div class="rome">sakurai reika</div>
+</div>
+<div class="member" onclick="window.location.href='/sasaki-kotoko'">
+	<div class="avatar" style="background-image:url(/avatar/sasaki-kotoko.jpg)"></div>
+	<div class="name">佐々木琴子</div>
+	<div class="rome">sasaki kotoko</div>
+</div>
+<div class="member" onclick="window.location.href='/shiraishi-mai'">
+	<div class="avatar" style="background-image:url(/avatar/shiraishi-mai.jpg)"></div>
+	<div class="name">白石麻衣</div>
+	<div class="rome">shiraishi mai</div>
+</div>
+<div class="member" onclick="window.location.href='/shinuchi-mai'">
+	<div class="avatar" style="background-image:url(/avatar/shinuchi-mai.jpg)"></div>
+	<div class="name">新内眞衣</div>
+	<div class="rome">shinuchi mai</div>
+</div>
+<div class="member" onclick="window.location.href='/suzuki-ayane'">
+	<div class="avatar" style="background-image:url(/avatar/suzuki-ayane.jpg)"></div>
+	<div class="name">鈴木絢音</div>
+	<div class="rome">suzuki ayane</div>
+</div>
+<div class="member" onclick="window.location.href='/takayama-kazumi'">
+	<div class="avatar" style="background-image:url(/avatar/takayama-kazumi.jpg)"></div>
+	<div class="name">高山一実</div>
+	<div class="rome">takayama kazumi</div>
+</div>
+<div class="member" onclick="window.location.href='/terada-ranze'">
+	<div class="avatar" style="background-image:url(/avatar/terada-ranze.jpg)"></div>
+	<div class="name">寺田蘭世</div>
+	<div class="rome">terada ranze</div>
+</div>
+<div class="member" onclick="window.location.href='/nakada-kana'">
+	<div class="avatar" style="background-image:url(/avatar/nakada-kana.jpg)"></div>
+	<div class="name">中田花奈</div>
+	<div class="rome">nakada kana</div>
+</div>
+<div class="member" onclick="window.location.href='/nakamoto-himeka'">
+	<div class="avatar" style="background-image:url(/avatar/nakamoto-himeka.jpg)"></div>
+	<div class="name">中元日芽香</div>
+	<div class="rome">nakamoto himeka</div>
+</div>
+<div class="member" onclick="window.location.href='/nishino-nanase'">
+	<div class="avatar" style="background-image:url(/avatar/nishino-nanase.jpg)"></div>
+	<div class="name">西野七瀬</div>
+	<div class="rome">nishino nanase</div>
+</div>
+<div class="member" onclick="window.location.href='/noujou-ami'">
+	<div class="avatar" style="background-image:url(/avatar/noujou-ami.jpg)"></div>
+	<div class="name">能條愛未</div>
+	<div class="rome">noujou ami</div>
+</div>
+<!--<div class="member" onclick="window.location.href='/hashimoto-nanami'">
+	<div class="avatar" style="background-image:url(/avatar/hashimoto-nanami.jpg)"></div>
+	<div class="name">橋本奈々未</div>
+	<div class="rome">hashimoto nanami</div>
+</div>-->
+<div class="member" onclick="window.location.href='/higuchi-hina'">
+	<div class="avatar" style="background-image:url(/avatar/higuchi-hina.jpg)"></div>
+	<div class="name">樋口日奈</div>
+	<div class="rome">higuchi hina</div>
+</div>
+<div class="member" onclick="window.location.href='/hoshino-minami'">
+	<div class="avatar" style="background-image:url(/avatar/hoshino-minami.jpg)"></div>
+	<div class="name">星野みなみ</div>
+	<div class="rome">hoshino minami</div>
+</div>
+<div class="member" onclick="window.location.href='/hori-miona'">
+	<div class="avatar" style="background-image:url(/avatar/hori-miona.jpg)"></div>
+	<div class="name">堀未央奈</div>
+	<div class="rome">hori miona</div>
+</div>
+<div class="member" onclick="window.location.href='/matsumura-sayuri'">
+	<div class="avatar" style="background-image:url(/avatar/matsumura-sayuri.jpg)"></div>
+	<div class="name">松村沙友理</div>
+	<div class="rome">matsumura sayuri</div>
+</div>
+<div class="member" onclick="window.location.href='/yamazaki-rena'">
+	<div class="avatar" style="background-image:url(/avatar/yamazaki-rena.jpg)"></div>
+	<div class="name">山崎怜奈</div>
+	<div class="rome">yamazaki rena</div>
+</div>
+<div class="member" onclick="window.location.href='/wakatsuki-yumi'">
+	<div class="avatar" style="background-image:url(/avatar/wakatsuki-yumi.jpg)"></div>
+	<div class="name">若月佑美</div>
+	<div class="rome">wakatsuki yumi</div>
+</div>
+<div class="member" onclick="window.location.href='/watanabe-miria'">
+	<div class="avatar" style="background-image:url(/avatar/watanabe-miria.jpg)"></div>
+	<div class="name">渡辺みり愛</div>
+	<div class="rome">watanabe miria</div>
+</div>
+<div class="member" onclick="window.location.href='/wada-maaya'">
+	<div class="avatar" style="background-image:url(/avatar/wada-maaya.jpg)"></div>
+	<div class="name">和田まあや</div>
+	<div class="rome">wada maaya</div>
+</div>
+<!-- <div class="member" onclick="window.location.href='/sankisei'">
+	<div class="avatar" style="background-image:url(/avatar/sankisei.jpg)"></div>
+	<div class="name">３期生</div>
+	<div class="rome">sankisei</div>
+</div> -->
+<div class="member" onclick="window.location.href='/itou-riria'">
+	<div class="avatar" style="background-image:url(/avatar/itou-riria.jpg)"></div>
+	<div class="name">伊藤理々杏</div>
+	<div class="rome">itou riria</div>
+</div>
+<div class="member" onclick="window.location.href='/iwamoto-renka'">
+	<div class="avatar" style="background-image:url(/avatar/iwamoto-renka.jpg)"></div>
+	<div class="name">岩本蓮加</div>
+	<div class="rome">iwamoto renka</div>
+</div>
+<div class="member" onclick="window.location.href='/umezawa-minami'">
+	<div class="avatar" style="background-image:url(/avatar/umezawa-minami.jpg)"></div>
+	<div class="name">梅澤美波</div>
+	<div class="rome">umezawa minami</div>
+</div>
+<div class="member" onclick="window.location.href='/oozono-momoko'">
+	<div class="avatar" style="background-image:url(/avatar/oozono-momoko.jpg)"></div>
+	<div class="name">大園桃子</div>
+	<div class="rome">oozono momoko</div>
+</div>
+<div class="member" onclick="window.location.href='/kubo-shiori'">
+	<div class="avatar" style="background-image:url(/avatar/kubo-shiori.jpg)"></div>
+	<div class="name">久保史緒里</div>
+	<div class="rome">kubo shiori</div>
+</div>
+<div class="member" onclick="window.location.href='/sakaguchi-tamami'">
+	<div class="avatar" style="background-image:url(/avatar/sakaguchi-tamami.jpg)"></div>
+	<div class="name">阪口珠美</div>
+	<div class="rome">sakaguchi tamami</div>
+</div>
+<div class="member" onclick="window.location.href='/satou-kaede'">
+	<div class="avatar" style="background-image:url(/avatar/satou-kaede.jpg)"></div>
+	<div class="name">佐藤楓</div>
+	<div class="rome">satou kaede</div>
+</div>
+<div class="member" onclick="window.location.href='/nakamura-reno'">
+	<div class="avatar" style="background-image:url(/avatar/nakamura-reno.jpg)"></div>
+	<div class="name">中村麗乃</div>
+	<div class="rome">nakamura reno</div>
+</div>
+<div class="member" onclick="window.location.href='/mukai-hazuki'">
+	<div class="avatar" style="background-image:url(/avatar/mukai-hazuki.jpg)"></div>
+	<div class="name">向井葉月</div>
+	<div class="rome">mukai hazuki</div>
+</div>
+<div class="member" onclick="window.location.href='/yamashita-mizuki'">
+	<div class="avatar" style="background-image:url(/avatar/yamashita-mizuki.jpg)"></div>
+	<div class="name">山下美月</div>
+	<div class="rome">yamashita mizuki</div>
+</div>
+<div class="member" onclick="window.location.href='/yoshida-ayano-christie'">
+	<div class="avatar" style="background-image:url(/avatar/yoshida-ayano-christie.jpg)"></div>
+	<div class="name">吉田綾乃クリスティー</div>
+        <div class="rome">yoshida ayano christie</div>
+</div>
+<div class="member" onclick="window.location.href='/yoda-yuuki'">
+	<div class="avatar" style="background-image:url(/avatar/yoda-yuuki.jpg)"></div>
+	<div class="name">与田祐希</div>
+	<div class="rome">yoda yuuki</div>
+</div>
+<div class="member" onclick="window.location.href='/unei-sutaffu'">
+	<div class="avatar" style="background-image:url(/avatar/unei-sutaffu.jpg)"></div>
+	<div class="name">運営スタッフ</div>
+	<div class="rome">unei sutaffu</div>
+</div>
+</div>
+<div id="keyakimember">
+<div class="member" onclick="window.location.href='/ishimori-nijika'">
+	<div class="avatar" style="background-image:url(/avatar/ishimori-nijika.jpg)"></div>
+	<div class="name">石森虹花</div>
+	<div class="rome">ishimori nijika</div>
+</div>
+<div class="member" onclick="window.location.href='/imaizumi-yui'">
+	<div class="avatar" style="background-image:url(/avatar/imaizumi-yui.jpg)"></div>
+	<div class="name">今泉佑唯</div>
+	<div class="rome">imaizumi yui</div>
+</div>
+<div class="member" onclick="window.location.href='/uemura-rina'">
+	<div class="avatar" style="background-image:url(/avatar/uemura-rina.jpg)"></div>
+	<div class="name">上村莉菜</div>
+	<div class="rome">uemura rina</div>
+</div>
+<div class="member" onclick="window.location.href='/ozeki-rika'">
+	<div class="avatar" style="background-image:url(/avatar/ozeki-rika.jpg)"></div>
+	<div class="name">尾関梨香</div>
+	<div class="rome">ozeki rika</div>
+</div>
+<div class="member" onclick="window.location.href='/oda-nana'">
+	<div class="avatar" style="background-image:url(/avatar/oda-nana.jpg)"></div>
+	<div class="name">織田奈那</div>
+	<div class="rome">oda nana</div>
+</div>
+<div class="member" onclick="window.location.href='/koike-minami'">
+	<div class="avatar" style="background-image:url(/avatar/koike-minami.jpg)"></div>
+	<div class="name">小池美波</div>
+	<div class="rome">koike minami</div>
+</div>
+<div class="member" onclick="window.location.href='/kobayashi-yui'">
+	<div class="avatar" style="background-image:url(/avatar/kobayashi-yui.jpg)"></div>
+	<div class="name">小林由依</div>
+	<div class="rome">kobayashi yui</div>
+</div>
+<div class="member" onclick="window.location.href='/saitou-fuyuka'">
+	<div class="avatar" style="background-image:url(/avatar/saitou-fuyuka.jpg)"></div>
+	<div class="name">齋藤冬優花</div>
+	<div class="rome">saitou fuyuka</div>
+</div>
+<div class="member" onclick="window.location.href='/satou-shiori'">
+	<div class="avatar" style="background-image:url(/avatar/satou-shiori.jpg)"></div>
+	<div class="name">佐藤詩織</div>
+	<div class="rome">satou shiori</div>
+</div>
+<div class="member" onclick="window.location.href='/shida-manaka'">
+	<div class="avatar" style="background-image:url(/avatar/shida-manaka.jpg)"></div>
+	<div class="name">志田愛佳</div>
+	<div class="rome">shida manaka</div>
+</div>
+<div class="member" onclick="window.location.href='/sugai-yuuka'">
+	<div class="avatar" style="background-image:url(/avatar/sugai-yuuka.jpg)"></div>
+	<div class="name">菅井友香</div>
+	<div class="rome">sugai yuuka</div>
+</div>
+<div class="member" onclick="window.location.href='/suzumoto-miyu'">
+	<div class="avatar" style="background-image:url(/avatar/suzumoto-miyu.jpg)"></div>
+	<div class="name">鈴本美愉</div>
+	<div class="rome">suzumoto miyu</div>
+</div>
+<div class="member" onclick="window.location.href='/nagasawa-nanako'">
+	<div class="avatar" style="background-image:url(/avatar/nagasawa-nanako.jpg)"></div>
+	<div class="name">長沢菜々香</div>
+	<div class="rome">nagasawa nanako</div>
+</div>
+<div class="member" onclick="window.location.href='/habu-mizuho'">
+	<div class="avatar" style="background-image:url(/avatar/habu-mizuho.jpg)"></div>
+	<div class="name">土生瑞穂</div>
+	<div class="rome">habu mizuho</div>
+</div>
+<div class="member" onclick="window.location.href='/harada-aoi'">
+	<div class="avatar" style="background-image:url(/avatar/harada-aoi.jpg)"></div>
+	<div class="name">原田葵</div>
+	<div class="rome">harada aoi</div>
+</div>
+<div class="member" onclick="window.location.href='/hirate-yurina'">
+	<div class="avatar" style="background-image:url(/avatar/hirate-yurina.jpg)"></div>
+	<div class="name">平手友梨奈</div>
+	<div class="rome">hirate yurina</div>
+</div>
+<div class="member" onclick="window.location.href='/moriya-akane'">
+	<div class="avatar" style="background-image:url(/avatar/moriya-akane.jpg)"></div>
+	<div class="name">守屋茜</div>
+	<div class="rome">moriya akane</div>
+</div>
+<div class="member" onclick="window.location.href='/yonetani-nanami'">
+	<div class="avatar" style="background-image:url(/avatar/yonetani-nanami.jpg)"></div>
+	<div class="name">米谷奈々未</div>
+	<div class="rome">yonetani nanami</div>
+</div>
+<div class="member" onclick="window.location.href='/watanabe-rika'">
+	<div class="avatar" style="background-image:url(/avatar/watanabe-rika.jpg)"></div>
+	<div class="name">渡辺梨加</div>
+	<div class="rome">watanabe rika</div>
+</div>
+<div class="member" onclick="window.location.href='/watanabe-risa'">
+	<div class="avatar" style="background-image:url(/avatar/watanabe-risa.jpg)"></div>
+	<div class="name">渡邉理佐</div>
+	<div class="rome">watanabe risa</div>
+</div>
+<div class="member" onclick="window.location.href='/iguchi-mao'">
+	<div class="avatar" style="background-image:url(/avatar/iguchi-mao.jpg)"></div>
+	<div class="name">井口眞緒</div>
+	<div class="rome">iguchi mao</div>
+</div>
+<div class="member" onclick="window.location.href='/ushio-sarina'">
+	<div class="avatar" style="background-image:url(/avatar/ushio-sarina.jpg)"></div>
+	<div class="name">潮紗理菜</div>
+	<div class="rome">ushio sarina</div>
+</div>
+<div class="member" onclick="window.location.href='/kakizaki-memi'">
+	<div class="avatar" style="background-image:url(/avatar/kakizaki-memi.jpg)"></div>
+	<div class="name">柿崎芽実</div>
+	<div class="rome">kakizaki memi</div>
+</div>
+<div class="member" onclick="window.location.href='/kageyama-yuuka'">
+	<div class="avatar" style="background-image:url(/avatar/kageyama-yuuka.jpg)"></div>
+	<div class="name">影山優佳</div>
+	<div class="rome">kageyama yuuka</div>
+</div>
+<div class="member" onclick="window.location.href='/katou-shiho'">
+	<div class="avatar" style="background-image:url(/avatar/katou-shiho.jpg)"></div>
+	<div class="name">加藤史帆</div>
+	<div class="rome">katou shiho</div>
+</div>
+<div class="member" onclick="window.location.href='/saitou-kyouko'">
+	<div class="avatar" style="background-image:url(/avatar/saitou-kyouko.jpg)"></div>
+	<div class="name">齊藤京子</div>
+	<div class="rome">saitou kyouko</div>
+</div>
+<div class="member" onclick="window.location.href='/sasaki-kumi'">
+	<div class="avatar" style="background-image:url(/avatar/sasaki-kumi.jpg)"></div>
+	<div class="name">佐々木久美</div>
+	<div class="rome">sasaki kumi</div>
+</div>
+<div class="member" onclick="window.location.href='/sasaki-mirei'">
+	<div class="avatar" style="background-image:url(/avatar/sasaki-mirei.jpg)"></div>
+	<div class="name">佐々木美玲</div>
+	<div class="rome">sasaki mirei</div>
+</div>
+<div class="member" onclick="window.location.href='/takase-mana'">
+	<div class="avatar" style="background-image:url(/avatar/takase-mana.jpg)"></div>
+	<div class="name">高瀬愛奈</div>
+	<div class="rome">takase mana</div>
+</div>
+<div class="member" onclick="window.location.href='/takamoto-ayaka'">
+	<div class="avatar" style="background-image:url(/avatar/takamoto-ayaka.jpg)"></div>
+	<div class="name">高本彩花</div>
+	<div class="rome">takamoto ayaka</div>
+</div>
+<div class="member" onclick="window.location.href='/nagahama-neru'">
+	<div class="avatar" style="background-image:url(/avatar/nagahama-neru.jpg)"></div>
+	<div class="name">長濱ねる</div>
+	<div class="rome">nagahama neru</div>
+</div>
+<div class="member" onclick="window.location.href='/higashimura-mei'">
+	<div class="avatar" style="background-image:url(/avatar/higashimura-mei.jpg)"></div>
+	<div class="name">東村芽依</div>
+	<div class="rome">higashimura mei</div>
+</div>
+</div>
+</div>
+</body>
+</html>

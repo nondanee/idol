@@ -1,0 +1,49 @@
+# idol HTTPS server
+server {
+	listen 80;
+	listen 443 ssl;
+	server_name *???*;
+	server_name_in_redirect off;
+
+	# if ($server_port = 80) { return 497; }
+	error_page 497 https://$host$request_uri$args;
+
+	root html;
+	index index.html index.htm;
+
+	ssl on;
+	ssl_certificate /etc/letsencrypt/live/*???*/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/*???*/privkey.pem;
+
+	ssl_session_timeout 10m;
+	ssl_session_cache shared:SSL:10m;
+
+	ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers 'AES128+EECDH:AES128+EDH';
+	ssl_prefer_server_ciphers on;
+
+	location = /robots.txt {
+		alias *???*/static/robots.txt;
+		access_log    *???*;
+	}
+
+	location /avatar/ {
+		alias *???*/avatar/;
+	}
+
+	location /static/ {
+		alias *???*/static/;
+	}
+
+	location /photo/ {
+		alias *???*/photo/;
+	}
+
+	location / {
+		access_log    *???*;
+		proxy_pass    http://127.0.0.1:9980;
+		proxy_redirect off;
+		proxy_set_header REMOTE-HOST $remote_addr;
+	}
+	
+}

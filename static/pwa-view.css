@@ -1,0 +1,145 @@
+html{
+	font-family: "Trebuchet MS", "Hiragino Kaku Gothic Pro"!important;
+}
+body{	
+	overflow-x:hidden;
+	width: 100%;
+	background-color: #ffffff;
+	margin:0;
+	top: 0px;
+}
+img.wide {
+	width:100%;
+	display:block;
+	padding-top:8px;
+	padding-bottom:8px;
+}
+.head{
+	padding-top:60px;
+	padding-bottom: 30px;
+}
+.avatar{
+	width: 56px;
+	height: 56px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 28px;
+	background-size: 56px;
+}
+.title{
+	padding:0 12%;
+	color:#333333;
+	font-size: 24px;;
+	font-weight:bold; 
+	margin-bottom: 30px;
+	word-break:break-all;
+}
+.infor{
+	color: #999999;
+	text-align: center;
+	font-size: 16px;
+	padding-bottom: 32px;
+	transform: scale(0.625); 
+	transform-origin: center top;
+	-webkit-transform-origin: center top;
+	-moz-transform-origin: center top;
+	-o-transform-origin: center top;
+	-ms-transform-origin: center top;
+}
+.depart{
+	font-size:11px;
+	color: #f0f0f0;
+	padding-bottom: 24px;
+}
+.title,.infor,.depart{
+	text-align: center;
+}
+p{
+	line-height: 1.7;
+	font-size: 15px;
+	padding: 0  6%;
+	margin:0;
+	color:#555555;
+	overflow:hidden;
+	word-break:break-all;
+}
+p>img{max-width:100%;}
+.article{
+	padding-bottom:160px;
+}
+.footer{
+	background-image:url(/static/footer.png);
+	width:100%;
+	height:36px;
+	text-align: center;
+	background-repeat:no-repeat;
+	background-size:auto 18px;
+	background-position:center center;
+}
+img.wide {width:100%;}
+#translate,#back,#link
+{
+	height:48px;
+	width:48px;
+	background-size:18px 18px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	display:inline-block;
+}
+#translate{
+	float:right;
+	position:relative;
+        right:4px;
+	background-image:url("/static/ic_translate.png");
+}
+#link{
+	float:right;
+	position:relative;
+	right:4px;
+	background-image:url("/static/ic_link.png");
+}
+#back{
+	float:left;
+	position:relative;
+	left:4px;
+	background-image:url("/static/ic_close.png");
+}
+#blank{
+	float:left;
+	position:relative;
+	height:48px;
+	left:4px;
+}
+#translate:active,#back:active,#link:active
+{
+	border-radius:18px;
+	background-color:#f5f5f5;
+	height:36px;
+	width:36px;
+	margin:6px;
+}
+#topbar{
+	position:fixed;
+	top:0px;
+	width:100%;
+	height:48px;
+	box-shadow:0 0 3px #dfdfdf;
+	background-color:rgba(255,255,255,1);
+	z-index:5;
+}
+.text{
+	margin-top:48px;
+}
+#zh-cn{
+	display:none;
+}
+::selection {
+        background: #b4b4b4;
+        color: #fff;
+}
+br,img,.depart{
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
