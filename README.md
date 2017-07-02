@@ -1,9 +1,17 @@
-<img src="https://raw.githubusercontent.com/nondanee/idol/master/static/android_launcher.png" width="180" height="180">
+<img src="https://raw.githubusercontent.com/nondanee/idol/master/static/android_launcher.png" width="140" height="140">
 
-# idol 坂道系官博聚合阅读  
+# [idol](https://idolx46.top) 坂道系官博聚合阅读  
 2016.5 - 2017.7  
-[@nondanee](http://weibo.com/2314621010)  
+[@nondanee](http://weibo.com/2314621010) 
 
+## 关于
+2016 银杏黄项目 的副产品...    
+主要功能是对乃木坂，欅坂成员博客进行重排版和翻译 (机翻)  
+欢迎访问 [https://idolx46.top](https://idolx46.top)  
+
+支持安卓 Chrome 发送图标到桌面，隐藏地址栏浏览  
+**想改成完整的 pwa 添加通知推送但是不会，求大佬指导**  
+  
   
 ## 项目部署  
 相关配置在 deploy 文件夹中  
@@ -58,9 +66,6 @@ WEB框架选择 aiohttp 1.0.0+
 	|--/avatar		// 成员公式头像  
 	|--/photo		// 博文配图  
 	|--/robots.txt		// 爬虫协议  
-	|--/???		// 其它路由由 python 服务代理  
+	|--/?????		// 其它路由由 python 服务代理  
 ```  
-  
-  
-  
   
