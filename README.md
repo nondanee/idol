@@ -1,11 +1,9 @@
-# idol  
-坂道系官博聚合阅读  
-[idolx46.top](https://idolx46.top)  
-  
+<img src="https://raw.githubusercontent.com/nondanee/idol/master/static/android_launcher.png" width="180" height="180">
+
+# idol 坂道系官博聚合阅读  
 2016.5 - 2017.7  
-第 n 次改版  
-  
-[联系我](http://weibo.com/2314621010)  
+[@nondanee](http://weibo.com/2314621010)  
+
   
 ## 项目部署  
 相关配置在 deploy 文件夹中  
@@ -17,7 +15,7 @@
   
 代码中所有个人配置已经移除  
 如绝对文件路径，数据库用户名口令，翻译服务用户名与口令等  
-统一标记 *???*  
+统一标记 ```*???*```  
 部署前请自行查找并修改  
   
   
@@ -28,7 +26,7 @@
 支持 python2.7+  
   
 ```tools.py``` 为自编模块  
-缺少其它模块请自行pip安装  
+缺少其它模块请自行 pip 安装  
   
 配置 linux 自带 crontab 服务定时执行  
   
@@ -57,10 +55,10 @@ WEB框架选择 aiohttp 1.0.0+
 ```  
 ~/  
 	|--/static		// 静态文件 html,css,js,img 等  
-	|--/avatar			// 成员公式头像  
-	|--/photo			// 博文配图  
-	|--/robots.txt			// 爬虫协议  
-	|--/???			// 其它路由由 python 服务代理  
+	|--/avatar		// 成员公式头像  
+	|--/photo		// 博文配图  
+	|--/robots.txt		// 爬虫协议  
+	|--/???		// 其它路由由 python 服务代理  
 ```  
   
   
