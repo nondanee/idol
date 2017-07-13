@@ -32,7 +32,7 @@ body{
 	display: inline-block;
 	padding: 14px 10px;
 	float: left;
-	background-image: url(/static/ic_back.png);
+	background-image: url(/static/image/ic_back.png);
 }
 #back:active{
 	margin:10px 6px;
@@ -45,12 +45,10 @@ body{
 #title{
 	float: left;
 	display: inline-block;
-	position: relative;
-	top: 2px;
 	font-size:18px;
 	font-weight:bold;
 	height: 56px;
-	line-height: 56px;
+	line-height: 59px;
 	color: #777777;
 }
 #tabbar{
@@ -64,29 +62,36 @@ body{
 	height: 25px;
 	padding-top: 11px;
 }
-.tab:active{
-	background-color: #e6e6e6;
-}
 .tab#keyaki{
 	float: right;
-	color: #bebebe;
+	color: #A0D468;
 }
 .tab#nogi{
 	float: left;
 	color: #9E00A5;
 }
-#line-nogi,#line-keyaki{
-	margin-top: 1px !important;
+.tab:active{
+	background-color: #e6e6e6;
+}
+.tab.unfocus{
+	color: #bebebe !important;
+}
+.tab>.line{
+	margin: 1px auto 0 auto;
 	height: 2px;
 	width: 6px;
-	margin: 0 auto;
 }
-#line-nogi{
+.tab#nogi>.line{
 	background-color: #9E00A5;
 }
-#line-keyaki{
-	visibility: hidden;
+.tab#keyaki>.line{
 	background-color: #A0D468;
+}
+.tab.unfocus>.line{
+	visibility: hidden;
+}
+.tab.focus>.line{
+	visibility: visible;
 }
 
 .member{
@@ -122,15 +127,4 @@ body{
 	background-size: 44px;
 	background-repeat: no-repeat;
 	background-position: center 0;
-}
-/*#keyakimember > div > div.avatar{
-	background-size: 72px;
-	background-position:center -3px;
-}
-#nogimember >  div > div.avatar{ 
-	background-size: 44px; 
-	background-position: center 0;
-}*/
-#keyakimember{
-	display:none;
 }

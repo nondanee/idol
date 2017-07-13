@@ -24,7 +24,7 @@ body{
 	display: inline-block;
 	padding: 14px 10px;
 	float: left;
-	background-image: url(/static/ic_back.png);
+	background-image: url(/static/image/ic_back.png);
 }
 #back:active{
 	margin:10px 6px;
@@ -35,20 +35,20 @@ body{
 	border-radius:18px;
 }
 #title{
-        float: left;
-        display: inline-block;
-        font-size:20px;
-        font-weight:bold;
-        height: 56px;
-        line-height: 56px;
-        color: #777777;
+	float: left;
+	display: inline-block;
+	font-size:18px;
+	font-weight:bold;
+	height: 56px;
+	line-height: 59px;
+	color: #777777;
 }
 #logo{
 	margin-top:96px;
 	margin-bottom:8px;
 	height: 180px;
 	width: 100%;
-	background-image: url(/static/about.jpg);
+	background-image: url(/static/image/about.jpg);
 	background-size: 160px 180px;
 	background-repeat: no-repeat;
 	background-position: center;

@@ -41,6 +41,15 @@ def timefriendly(timeset):
 
     return timeinfo
 
+def timeutc(timeset):
+    
+    # jptime = timeset.replace(tzinfo=pytz.timezone("Asia/Tokyo"))
+    jptime = pytz.timezone('Asia/Tokyo').localize(timeset)
+    utctime = jptime.astimezone(pytz.utc)
+    timeinfo = utctime.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    return timeinfo
+
 
 @asyncio.coroutine
 def create_pool():
@@ -65,6 +74,7 @@ def index(request):
     else:
         page = 1
 
+    global pool
     with (yield from pool) as conn:
         cur = yield from conn.cursor()
         judge = yield from cur.execute('SELECT post,rome,author,title,brief FROM list ORDER BY post DESC,kana DESC LIMIT %s,20'%((page - 1) * 20))
@@ -85,14 +95,21 @@ def index(request):
     for onepost in out:
 
         link = '/' + onepost[1] + '/' + onepost[0].strftime('%Y%m%d%H%M')
-        timeinfo = timefriendly(onepost[0])
+        # timeinfo = timefriendly(onepost[0])
+        timedata = timeutc(onepost[0])
         
         card='''
         <div class="card" onclick="window.location.href='{link}'">
-            <div class="line"><div class="avatar" style="background-image:url(/avatar/{rome}.jpg)"></div><span class="info">{author}<font color="#939393"> · {timeinfo}</font></span></div>
+            <div class="line">
+                <div class="avatar" style="background-image:url(/avatar/{rome}.jpg)"></div>
+                <span class="info">
+                    <span class="author">{author}</span> · 
+                    <span class="post" data-post="{timedata}"></span>
+                </span>
+            </div>
             <div class="title">{title}</div>
             <div class="brief">{brief}</div>
-        </div> '''.format(link = link,rome = onepost[1],author = onepost[2],timeinfo = timeinfo,title = onepost[3],brief = onepost[4])
+        </div> '''.format(link = link,rome = onepost[1],author = onepost[2],timedata = timedata,title = onepost[3],brief = onepost[4])
 
         content = content + card
 
@@ -105,26 +122,25 @@ def index(request):
 <meta name="theme-color" content="#eeeeee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="/static/android_launcher.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" sizes="144x144" href="/static/logo/144.png">
 <link rel="apple-touch-icon-precomposed" href="/static/apple_launcher.png">
-<link rel="shortcut icon" href="/static/favicon.ico"/>
-<link rel="bookmark" href="/static/favicon.ico"/>
-<link rel="stylesheet" type="text/css" href="/static/pwa-main.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/pwa-main.css" />
 </head>
 <body>
-<div id="topbar" onclick="pageScroll();" ondblclick="Refresh();">
+<div id="topbar" onclick="pagescroll()">
 	<div id="logo"></div>
 	<div id="app">idol</div>
-	<div id="about" onclick="event.cancelBubble=true;window.location.href='/static/pwa-about.html'"></div>
-	<div id="member" onclick="event.cancelBubble=true;window.location.href='/static/pwa-group.html'"></div>
+	<div id="about" onclick="event.cancelBubble=true;window.location.href='/about'"></div>
+	<div id="member" onclick="event.cancelBubble=true;window.location.href='/group'"></div>
 </div>
 <div id="content">%s
 </div>
 <div id="loading"></div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-<script src="/static/main.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script src="/static/js/main.js"></script>
 </html>
 '''
 
@@ -199,74 +215,20 @@ def view(request):
 <meta name="theme-color" content="#ffffff">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="shortcut icon" href="/static/favicon.ico"/>
-<link rel="bookmark" href="/static/favicon.ico"/>
-<link rel="stylesheet" type="text/css" href="/static/pwa-view.css" />
-<script type="text/javascript">
-var Done=0;
-var scrolldelay;
-function Translate()
-{
-	if (Done==0)
-	{
-		document.getElementById("zh-cn").style.display="block";
-		document.getElementById("ja-jp").style.display="none";
-		Done=1;
-		history.replaceState({"text":"translation"}, null, null);
-	}
-	else if(Done==1)
-	{
-		document.getElementById("zh-cn").style.display="none";
-		document.getElementById("ja-jp").style.display="block";
-		Done=0;
-		history.replaceState({"text":"original"}, null, null);
-	}
-};
-function statusCheck() {
-	if(history.state!=null)
-	{
-		if(history.state.text=="original")
-		{
-			document.getElementById("zh-cn").style.display="none";
-			document.getElementById("ja-jp").style.display="block";
-		}
-		else if(history.state.text="translation")
-		{
-			document.getElementById("zh-cn").style.display="block";
-			document.getElementById("ja-jp").style.display="none";
-		}
-	}
-}
-function pageScroll(){
-	if(document.documentElement.scrollTop+document.body.scrollTop==0){
-		clearTimeout(scrolldelay);
-	}
-	else{
-		window.scrollBy(0,-50);
-		scrolldelay=setTimeout('pageScroll()',10);
-	}
-}
-function docReady(cb) {
-	if (document.readyState != 'loading') {
-		cb();
-	} 
-	else {
-		document.addEventListener('DOMContentLoaded', cb);
-	}
-}
-docReady(statusCheck);
-</script>
-	</head>
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" type="text/css" href="/static/css/pwa-view.css" />
+<script type="text/javascript" src="/static/js/view.js"></script>
+</head>
 <body>
-	<div id="topbar" onclick="pageScroll();"><div id="back" onclick="event.cancelBubble=true;javascript:history.back(-1);"></div><div id="link" onclick="event.cancelBubble=true;window.location.href='%s'"></div><div id="translate" onclick="event.cancelBubble=true;Translate()"></div></div>
-	%s
-	%s
+    <div id="topbar" onclick="pageScroll();"><div id="back" onclick="event.cancelBubble=true;javascript:history.back(-1);"></div><div id="link" onclick="event.cancelBubble=true;window.location.href='%s'"></div><div id="translate" onclick="event.cancelBubble=true;viewSwitch()"></div></div>
+    %s
+    %s
 </body>
 </html>'''
 
 
     article='''
-    <div class ="text" id="%s">
+    <div class ="text %s" id="%s">
         <div class="head"><div class="avatar" style="background-image:url(/avatar/%s.jpg)"></div></div>
         <div class="title">%s</div>
         <div class="infor">%s · %s · %s</div>
@@ -275,8 +237,8 @@ docReady(statusCheck);
 	<div class="footer"></div>
     </div>'''
 
-    article_original = article%("ja-jp",out[0][2],out[0][5],out[0][3],groupname,jptimeinfo,jptext)
-    article_translation = article%("zh-cn",out[0][2],out[0][6],out[0][3],groupname,cntimeinfo,cntext)
+    article_original = article%("focus","ja-jp",out[0][2],out[0][5],out[0][3],groupname,jptimeinfo,jptext)
+    article_translation = article%("unfocus","zh-cn",out[0][2],out[0][6],out[0][3],groupname,cntimeinfo,cntext)
     html = html%(out[0][5],out[0][4],article_original,article_translation)
 
     return web.Response(text=html,content_type='text/html',charset='utf-8')
@@ -320,32 +282,31 @@ def member(request):
     for onepost in out:
 
         link = '/' + onepost[1] + '/' + onepost[0].strftime('%Y%m%d%H%M')
-        timeinfo = timefriendly(onepost[0])
+        # timeinfo = timefriendly(onepost[0])
+        timedata = timeutc(onepost[0])
         
         card='''
         <div class="card" onclick="window.location.href='{link}'">
-            <div class="line">{timeinfo}</div>
+            <div class="line"><span class="post" data-post="{timedata}"></span></div>
             <div class="title">{title}</div>
             <div class="brief">{brief}</div>
-        </div> '''.format(link = link,timeinfo = timeinfo,title = onepost[3],brief = onepost[4])
+        </div> '''.format(link = link,timedata = timedata,title = onepost[3],brief = onepost[4])
 
         content = content + card
 
     html='''<!DOCTYPE html>
+<html>
+<head>
+<title>%s</title>
 <meta charset="UTF-8" />
 <meta name="theme-color" content="#eeeeee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="/static/android_launcher.png">
-<html>
-<head>
-<title>%s</title>
-<link rel="shortcut icon" href="/static/favicon.ico"/>
-<link rel="bookmark" href="/static/favicon.ico"/>
-<link rel="stylesheet" type="text/css" href="/static/pwa-member.css" />
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" type="text/css" href="/static/css/pwa-member.css" />
 </head>
 <body>
-<div id="topbar" onclick="pageScroll();">
+<div id="topbar" onclick="pagescroll();">
     <div id="back" onclick="event.cancelBubble=true;javascript:history.back(-1);"></div>
     <div id="name"><span id="kaji">%s</span><span id="rome">%s</span></div>
     <div id="avatar" style="background-image:url(/avatar/%s.jpg)"></div>
@@ -353,8 +314,8 @@ def member(request):
 <div id="content">%s
 </div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-<script src="/static/main.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script src="/static/js/main.js"></script>
 </html>'''
 
 
