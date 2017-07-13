@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/nondanee/idol/master/static/android_launcher.png" width="140" height="140">
+<img src="https://raw.githubusercontent.com/nondanee/idol/master/static/logo/144.png" width="144" height="144">
 
 # [idol](https://idolx46.top) 坂道系官博聚合阅读  
 2016.5 - 2017.7  
@@ -67,7 +67,7 @@ WEB框架选择 aiohttp 1.0.0+
 /
 ├── favicon.ico		// 网站图标
 ├── robots.txt		// 爬虫协议
-├── manifest.json		// 网络应用清单
+├── manifest.json	// 网络应用清单
 │
 ├── static/		// 静态文件  
 │   ├── css
