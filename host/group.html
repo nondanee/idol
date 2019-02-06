@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>メンバー</title>
+	<meta charset="UTF-8" />
+	<meta name="theme-color" content="#eeeeee">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" sizes="144x144" href="/static/logo/144.png">
+	<link rel="stylesheet" type="text/css" href="/static/css/pwa-base.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/pwa-group.css" />
+</head>
+<script src="/static/js/list.js"></script>
+<script type="text/javascript">
+	var scrollDelay
+	function statusCheck(){
+		if(history.state != null && history.state.group == 'keyakizaka')
+			tabSwitch(1)
+		else
+			tabSwitch(0)
+	}
+	function pageScroll(){
+		if(document.documentElement.scrollTop + document.body.scrollTop == 0){
+			clearTimeout(scrollDelay)
+		}
+		else{
+			window.scrollBy(0, -70)
+			scrollDelay = setTimeout(pageScroll, 10)
+		}
+	}
+	function createElement(tagName, className, innerHTML){
+		var element = document.createElement(tagName)
+		if(className) element.className = className
+		if(innerHTML) element.innerHTML = innerHTML 
+		return element
+	}
+	function buildList(type){
+		var fragment = document.createDocumentFragment()
+		var select = Object.keys(members).filter(function(id){
+			return (type == 0 && id[0] == '0') || (type != 0 && id[0] != '0')
+		})
+		select.sort().forEach(function(id){
+			var item = createElement('a', 'member')
+			item.href = '/member/' + id
+			var avatar = item.appendChild(createElement('div', 'avatar'))
+			avatar.style.backgroundImage = 'url(' + '/avatar/' + members[id][1] + '.jpg' + ')'
+			item.appendChild(createElement('div', 'name', members[id][0]))
+			item.appendChild(createElement('div', 'romaji', members[id][1]))
+			fragment.appendChild(item)
+		})
+		document.getElementById('list').innerHTML = ''
+		document.getElementById('list').appendChild(fragment)
+	}
+	function tabSwitch(type){
+		buildList(type)
+		document.getElementById('tabbar').children[type].classList.add('focus')
+		document.getElementById('tabbar').children[1 - type].classList.remove('focus')
+		history.replaceState({'group': ['nogizaka', 'keyakizaka'][type]}, null, null)
+	}
+	function swipeListener(){
+		var startX, startY, endX, endY
+		var element = document.getElementById('list')
+		function react(){
+			if(Math.abs(startY - endY) < 80){
+				if(startX - endX > 80)
+					tabSwitch(1)
+				else if(endX - startX > 80)
+					tabSwitch(0)
+			}
+		}
+		element.addEventListener('touchstart',function(event){
+			startX = event.targetTouches[0].pageX
+			startY = event.targetTouches[0].pageY
+		})
+		element.addEventListener('touchend',function(event){
+			endX = event.changedTouches[0].pageX
+			endY = event.changedTouches[0].pageY
+			react()
+		})
+	}
+	window.onload = function(){
+		swipeListener()
+		statusCheck()
+		document.getElementById('back').onclick = function(){
+			history.back(-1) | window.close()
+		}
+		document.getElementById('nogizaka').onclick = function(){
+			tabSwitch(0)
+		}
+		document.getElementById('keyakizaka').onclick = function(){
+			tabSwitch(1)
+		}
+	}
+</script>
+<body>
+	<div id="topbar">
+		<button id="back"></button>
+		<div id="title">メンバー</div>
+	</div>
+	<div id="tabbar">
+		<div class="tab" id="nogizaka">NOGIZAKA46</div>
+		<div class="tab" id="keyakizaka">KEYAKIZAKA46</div>
+	</div>
+	<div id="list"></div>
+</body>
+</html>

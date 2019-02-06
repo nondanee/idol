@@ -1,0 +1,70 @@
+body{
+	margin: 0;
+	font-family: 'roboto', 'Trebuchet MS', 'Hiragino Kaku Gothic Pro';
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+button{
+	border: 0;
+	padding: 0;
+	outline: 0;
+	background-color: rgba(0,0,0,0);
+	cursor: pointer;
+	font-weight: normal;
+	font-style: normal;
+	user-select: none;
+}
+#topbar, #tabbar{
+	width: 100%;
+	position: fixed;
+	border-bottom: 1px solid #dfdfdf;
+	box-shadow: 0px 0px 2px #dfdfdf;
+	background-color: #eeeeee;
+	display: flex;
+	align-items: center;
+}
+#topbar{
+	z-index: 99;
+	top: 0px;
+	height: 56px;
+}
+#tabbar{
+	z-index: 99;
+	top: 57px;
+	height: 36px;
+}
+#topbar>#title{
+	height: 56px;
+	line-height: 59px;
+	color: #777777;
+}
+#topbar>*{
+	flex: none;
+}
+#topbar>.fill{
+	flex: auto;
+}
+#topbar>button{
+	height: 100%;
+	width: 40px;
+	background-size: 28px 28px;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+}
+#topbar>button:active::after{
+	content: '';
+	z-index: -1;
+	border-radius: 50%;	
+	height: 36px;
+	width: 36px;
+	margin: auto;
+	background-color: #e2e2e2;
+}
+#topbar>#back{
+	width: 48px;
+	background-image: url(/static/image/ic_back.png);
+}

@@ -1,0 +1,63 @@
+html,body{
+	height: 100%;
+}
+body{
+	background-color: #fbfbfb;
+}
+#topbar>#title{
+	font-weight: bold;
+	font-size:18px;
+}
+.info{
+	position: relative;
+	padding-top: 57px;
+	padding-bottom: 24px;
+	width: 100%;
+	overflow: hidden;
+}
+.info #logo{
+	margin: 24px auto 14px auto;
+	width: 96px;
+	height: 96px;
+	background-image: url(/static/logo/192.png);
+	background-size: 96px 96px;
+}
+.info #version{
+	bottom: 24px;
+	margin: auto;
+	color: #bbbbbb;
+	width: 100%;
+	text-align: center;
+}
+
+.cell{
+	position: relative;
+	padding: 10px 16px;
+	border-bottom: 1px solid #efefef;
+	background-color: #ffffff;
+}
+.cell:nth-child(3){
+	border-top: 1px solid #efefef;
+	color: red;
+}
+.cell:active{
+	background-color: #ececec;
+}
+.cell label{
+	font-size: 16px;
+	color: #333333;
+}
+
+.cell access{
+	display: inline-block;
+	height: 6px;
+	width: 6px;
+	border-width: 2px 2px 0 0;
+	border-color: #c8c8cd;
+	border-style: solid;
+	transform:rotate(45deg);
+	position: absolute;
+	top: 50%;
+	margin-top: -4px;
+	right: 16px;
+}

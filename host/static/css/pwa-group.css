@@ -1,0 +1,80 @@
+#topbar>#title{
+	font-size: 18px;
+	font-weight: bold;
+}
+#list{
+	padding-top: 94px;
+	padding-bottom: 4px;
+}
+#list>div{
+	display: none;
+}
+.tab{
+	width: 50%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+	height: 36px;
+	line-height: 36px;
+	color: #bebebe;
+}
+.tab::after{
+	position: relative;
+	content: '';
+	display: block;
+	margin: auto;
+	bottom: 8px;
+	height: 2px;
+	width: 6px;
+}
+.tab.focus#keyakizaka{
+	color: #A0D468;
+}
+.tab.focus#keyakizaka::after{
+	background-color: #A0D468;
+}
+.tab.focus#nogizaka{
+	color: #9E00A5;
+}
+.tab.focus#nogizaka::after{
+	background-color: #9E00A5;
+}
+.tab:active{
+	background-color: #e6e6e6;
+}
+
+.member{
+	display: block;
+	height: 68px;
+	margin: 0 8px;
+	border-bottom: 1px solid #f6f6f6;
+	overflow: hidden;
+}
+.member:active{
+	margin: 0;
+	padding: 0 8px;
+	background-color: #f7f7f7;
+}
+.avatar,.name,.romaji{
+	float: left;
+	display: inline-block;
+	vertical-align: top;
+}
+.name,.romaji{
+	color: #bebebe;
+	line-height: 68px;
+	font-size: 15px;
+}
+.name{
+	color: #9b9b9b;
+	margin-right: 8px;
+}
+.avatar{
+	width: 44px;
+	height: 44px;
+	margin: 12px 16px 12px 18px;
+	border-radius: 22px;
+	background-size: 44px;
+	background-repeat: no-repeat;
+	background-position: center 0;
+}

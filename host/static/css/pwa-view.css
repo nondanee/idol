@@ -1,0 +1,264 @@
+html{
+	font-family: "Trebuchet MS", "Hiragino Kaku Gothic Pro"!important;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+body{	
+	overflow-x: hidden;
+	background-color: #ffffff;
+	margin: 0;
+}
+#topbar{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 48px;
+	padding: 0 4px;
+	box-sizing: border-box;
+	display: flex;
+	box-shadow: 0 0 3px #dfdfdf;
+	background-color: rgba(255,255,255,1);
+	z-index: 5;
+	-webkit-animation-name: slideIn; 
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-delay: 0s;
+}
+
+@-webkit-keyframes slideIn {
+	0% {
+		transform: translateY(-51px);
+	}
+	100% { 
+		transform: translateY(0px);
+	}
+}
+.fill{
+	flex-grow: 1;
+	pointer-events: none;
+}
+button{
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+	outline:none; 
+}
+button{
+	position: relative;
+	height: 48px;
+	width: 48px;
+	background-size: 18px 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+button::before{
+	content: "";
+	z-index: -1;
+	position: absolute;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
+	background-color: #f5f5f5;
+	top: 0;left: 0;right: 0;bottom: 0;
+	margin: auto;
+	opacity: 0;
+}
+button:active::before{
+	opacity: 1;
+}
+button#translate{
+	background-image: url(/static/image/ic_translate.png);
+}
+button#link{
+	background-image: url(/static/image/ic_link.png);
+}
+button#back{
+	background-image: url(/static/image/ic_close.png);
+}
+
+.text{
+	padding-top: 48px;
+}
+.text.focus{
+	display: block;
+}
+.text.unfocus{
+	display: none;
+}
+.header{
+	padding-top: 60px;
+    padding-bottom: 24px;
+	display: block;
+}
+.avatar{
+	width: 56px;
+	height: 56px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 28px;
+	background-size: 56px;
+}
+.title{
+	padding: 0 12%;
+	color: #333333;
+	font-size: 24px;;
+	font-weight: bold;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	word-break: break-all;
+}
+.info{
+	color: #999999;
+	text-align: center;
+	font-size: 16px;
+	padding-bottom: 32px;
+	transform: scale(0.625); 
+	transform-origin: center top;
+	-webkit-transform-origin: center top;
+	-moz-transform-origin: center top;
+	-o-transform-origin: center top;
+	-ms-transform-origin: center top;
+}
+.separator{
+	font-size: 11px;
+	color: #f0f0f0;
+}
+.title,.info,.separator{
+	text-align: center;
+}
+.article{
+	padding-bottom: 160px;
+}
+p{
+	line-height: 1.7;
+	font-size: 15px;
+	padding: 0  6%;
+	margin: 0;
+	color: #555555;
+	overflow: hidden;
+	word-break: break-all;
+}
+p>img{
+	max-width: 100%;
+	display: block;
+}
+img.wide{
+	width: 100%;
+	display: block;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.footer{
+	background-image: url(/static/image/footer.png);
+	width: 100%;
+	height: 36px;
+	text-align: center;
+	background-repeat: no-repeat;
+	background-size: auto 18px;
+	background-position: center center;
+}
+::selection{
+	background: #b4b4b4;
+	color: #fff;
+}
+br,img,.separator{
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media screen and (min-width: 720px) {
+	html{
+		font-family: Helvetica, Arial, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	}
+	body{
+		background-color: #f5f5f5;
+	}	
+	#topbar{
+		margin: 0 auto;
+		width: 600px;
+		left: 0;right: 0;
+		/*position: relative;*/
+		box-shadow: 0 0 0 #000;
+		border-bottom: 1px solid #f5f5f5;
+		height: 54px;
+		/*margin-top: 12px;*/
+	}
+	button{
+		width: 54px;
+		height: 54px;
+	}
+	button{
+		background-size: 20px 20px;
+	}
+	button:hover::before{
+		opacity: 1;
+	}
+	.text{
+		width: 600px;
+		margin: 0 auto;
+		background-color: #ffffff;
+		padding-top: 54px;
+		/*margin-bottom: 12px;*/
+	}
+	.header{
+		padding-top: 96px;
+		padding-bottom: 30px;
+	}
+	.avatar{
+		width: 78px;
+		height: 78px;
+		margin-left: auto;
+		margin-right: auto;
+		border-radius: 50%;
+		background-size: 78px;
+	}
+	.title{
+		width: 500px;
+		margin: 48px auto 24px auto;
+		padding: 0;
+		font-size: 32px;
+		font-weight: bold; 
+		word-break: break-all;
+	}
+	.info{
+		font-size: 12px;
+		color: #999999;
+		padding-bottom: 100px;
+		text-align: center;
+		transform: scale(1);
+	}
+	.separator{
+		color: #f4f4f4;
+		cursor: default;
+	 	-webkit-user-select: none;
+		-moz-user-select: none;
+	   	-ms-user-select: none;
+		user-select: none;
+	}
+	p{
+		font-size: 17px;
+		padding: 0 28px;
+		line-height: 1.8;
+		margin: 0;
+		color: #555555;
+		overflow: hidden;
+		word-break: break-all;
+	}
+	img.wide {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+	.article{
+		padding-bottom: 160px;
+	}
+	.footer{
+		opacity: 0.5;
+		height: 48px;
+		background-size: auto 24px;
+	}
+	a:link{color: #1e1e1e; text-decoration: none;}
+	a:visited{color: #1e1e1e; text-decoration: none;}
+	a:hover{color: #1e1e1e; text-decoration: underline !important;}
+}

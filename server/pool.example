@@ -1,0 +1,15 @@
+import asyncio
+import aiomysql
+
+@asyncio.coroutine
+def create_pool(app):
+    pool = yield from aiomysql.create_pool(
+        host = 'host',
+        port = 3306,
+        user = 'user',
+        password = 'password',
+        db = 'db',
+        charset = 'utf8mb4',
+        loop = app.loop
+    )
+    app['pool'] = pool

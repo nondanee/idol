@@ -1,0 +1,38 @@
+#topbar>#title{
+	line-height: initial;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#topbar>#title>#name{
+	font-size: 17px;
+	font-weight: bold;
+	color: #777777;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#topbar>#title>#romaji{
+	font-size: 11px;
+	color: #bebebe;
+}
+#topbar>#avatar{
+	width: 34px;
+	height: 34px;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 17px;
+	background-size: 34px;
+	box-shadow: 0 0 2px #dedede;
+	opacity: 0.9;
+	margin-right: 12px;
+}
+.card{
+	padding: 16px 14px 16px 14px;
+}
+.card:active{
+	padding: 16px 24px 16px 24px;
+}
+.card>.info{
+	height: inherit;
+	margin-bottom: 5px;
+}

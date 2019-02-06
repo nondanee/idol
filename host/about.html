@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>について</title>
+	<meta charset="UTF-8" />
+	<meta name="theme-color" content="#eeeeee">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" sizes="144x144" href="/static/logo/144.png">
+	<link rel="stylesheet" type="text/css" href="/static/css/pwa-base.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/pwa-about.css" />
+</head>
+<body>
+	<div id="topbar">
+		<button id="back"></button>
+		<div id="title">について</div>
+	</div>
+	<div class="info">
+		<div id="logo"></div>
+		<div id="version">
+			V20181213<br>
+			<small>Google Cloud Platform 也太贵了吧</small>
+		</div>
+	</div>
+<!-- 	<div class="cell">
+		<label>PWA的正确使用姿势</label><access></access>
+	</div> -->
+	<div class="cell">
+		<label>乃木坂46 公式ブログ</label><access></access>
+	</div>
+	<div class="cell">
+		<label>欅坂46 公式ブログ</label><access></access>
+	</div>
+	<div class="cell">
+		<label>联系开发者</label><access></access>
+	</div>
+</body>
+<script type="text/javascript">
+	document.getElementById('back').onclick = function(){
+		history.back(-1) | window.close()
+	}
+	document.getElementsByClassName('cell')[0].onclick = function() {
+		window.location.href = 'http://blog.nogizaka46.com/'
+	}
+	document.getElementsByClassName('cell')[1].onclick = function() {
+		window.location.href = 'http://www.keyakizaka46.com/s/k46o/diary/member/list?site=k46o&ima=0000'
+	}
+	document.getElementsByClassName('cell')[2].onclick = function() {
+		window.location.href = 'https://github.com/nondanee'
+	}
+</script>
+</html>
+
