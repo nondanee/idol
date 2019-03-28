@@ -14,7 +14,7 @@ def fetch(url):
             print(e)
 
 def from_keyakizaka_pc_site(page = 1):
-    html = fetch('http://www.keyakizaka46.com/s/k46o/diary/member/list?site=k46o&ima=0000&page={}'.format(page-1)).decode('utf-8')
+    html = fetch('http://www.keyakizaka46.com/s/k46o/diary/member/list?site=k46o&ima=0000&page={}'.format(page - 1)).decode('utf-8')
     regexp = re.compile(r'<article>[\s\S]*?<h3>\s*<a href="(.*?)">(.*?)</a>[\s\S]*?<p class="name">\s*([\s\S]*?)\s*</p>[\s\S]*?<div class="box-article">([\s\S]*?)</div>\s+?<div class="box-bottom">[\s\S]*?<li>\s*([\s\S]*?)\s*</li>[\s\S]*?</article>', re.M|re.I)
     entries = regexp.findall(html)
     assert len(entries) == 20
@@ -24,6 +24,21 @@ def from_keyakizaka_pc_site(page = 1):
         post = datetime.datetime.strptime(entry[4], '%Y/%m/%d %H:%M').strftime('%Y/%m/%d %H:%M')
         link = 'http://www.keyakizaka46.com{}'.format(entry[0])
         title = entry[1]
+        text = entry[3]
+        result.append([post, author, title, text, link])
+    return result
+
+def from_hinatazaka_pc_site(page = 1):
+    html = fetch('https://www.hinatazaka46.com/s/official/diary/member/list?ima=0000&page={}'.format(page - 1)).decode('utf-8')
+    regexp = re.compile(r'<div class="p-blog-article">[\s|\S]+?<div class="c-blog-article__title">\s*([\s|\S]+?)\s*</div>[\s|\S]+?<div class="c-blog-article__date">\s*([\s|\S]+?)\s*</div>\s*<div class="c-blog-article__name">\s*([\s|\S]+?)\s*</div>[\s|\S]+?<div class="c-blog-article__text">\s*([\s|\S]+?)\s*</div>\s*<div class="p-button__blog_detail">\s*?<a class="c-button-blog-detail" href="([^"]+)"', re.M|re.I)
+    entries = regexp.findall(html)
+    assert len(entries) == 20
+    result = []
+    for entry in entries:
+        author = entry[2].replace(' ', '')
+        link = 'http://www.hinatazaka46.com{}'.format(entry[4])
+        post = datetime.datetime.strptime(entry[1], '%Y.%m.%d %H:%M').strftime('%Y/%m/%d %H:%M')
+        title = entry[0]
         text = entry[3]
         result.append([post, author, title, text, link])
     return result

@@ -18,11 +18,15 @@ def member_affiliate(id):
     if id.startswith('1'):
         affiliation = '欅坂46'
     if id.startswith('2'):
-        affiliation = 'けやき坂46'
-    if id.startswith('03'):
-        affiliation = '乃木坂46 3期生'
-    if id.startswith('22'):
-        affiliation = 'けやき坂46 2期生'
+        affiliation = '日向坂46'
+    if id.startswith('12'):
+        affiliation = '欅坂46 2期生'
+    if id.startswith('23'):
+        affiliation = '日向坂46 3期生'
+#     if id.startswith('03'):
+#         affiliation = '乃木坂46 3期生'
+#     if id.startswith('22'):
+#         affiliation = 'けやき坂46 2期生'
     return affiliation
 
 def thumb_locate(fid, available):

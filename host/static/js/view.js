@@ -112,10 +112,7 @@ function timeFriendly(type){
 }
 
 function groupName(){
-	if (shareData['fid'][0] == '1')
-		return 'KEYAKI'
-	else if (shareData['fid'][0] == '0')
-		return 'NOGI'
+	return ['NOGI', 'KEYAKI', 'HINATA'][shareData.author.mid[0]]
 }
 
 function createElement(tagName, className, innerHTML){

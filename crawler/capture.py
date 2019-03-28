@@ -17,9 +17,15 @@ def keyakizaka_only(page = 1):
     blogs.sort(key = operator.itemgetter(0), reverse = False)
     return blogs
 
-def both():
+def hinatazaka_only(page = 1):
+    blogs = source.from_hinatazaka_pc_site(page)
+    blogs.sort(key = operator.itemgetter(0), reverse = False)
+    return blogs
+
+def all():
     blogs = source.from_keyakizaka_pc_site()
     blogs += source.from_nogizaka_rss()
+    blogs += source.from_hinatazaka_pc_site()
     blogs.sort(key = operator.itemgetter(0), reverse = False)
     return blogs
 
@@ -42,7 +48,9 @@ def deal(connect, blogs):
         title = tool.purify_text(title)
         snippet = tool.clip_text(text)
 
-        (author, title) = member.identify(author, title)
+        author = member.bind(author, feed_id)
+        author, title = member.identify(author, title)
+
         member_id = member.get_id(author)
         romaji = member.get_romaji(author)
 

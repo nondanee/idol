@@ -125,6 +125,7 @@ def legacy(request):
             'fid': fid,
             'post': tool.time_utc(data[0]),
             'author': {
+                'mid': str(data[1]).zfill(4),
                 'name': data[2],
                 'avatar': tool.avatar_locate(data[1], data[3])
             },

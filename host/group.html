@@ -13,11 +13,9 @@
 <script src="/static/js/list.js"></script>
 <script type="text/javascript">
 	var scrollDelay
+	var group = {nogizaka: 0, keyakizaka: 1, hinatazaka: 2}
 	function statusCheck(){
-		if(history.state != null && history.state.group == 'keyakizaka')
-			tabSwitch(1)
-		else
-			tabSwitch(0)
+		tabSwitch(group[(history.state || {}).group || 'nogizaka'])
 	}
 	function pageScroll(){
 		if(document.documentElement.scrollTop + document.body.scrollTop == 0){
@@ -31,13 +29,14 @@
 	function createElement(tagName, className, innerHTML){
 		var element = document.createElement(tagName)
 		if(className) element.className = className
-		if(innerHTML) element.innerHTML = innerHTML 
+		if(innerHTML) element.innerHTML = innerHTML
 		return element
 	}
 	function buildList(type){
 		var fragment = document.createDocumentFragment()
 		var select = Object.keys(members).filter(function(id){
-			return (type == 0 && id[0] == '0') || (type != 0 && id[0] != '0')
+// 			return (type == 0 && id[0] == '0') || (type != 0 && id[0] != '0')
+			return id[0] == type
 		})
 		select.sort().forEach(function(id){
 			var item = createElement('a', 'member')
@@ -51,11 +50,15 @@
 		document.getElementById('list').innerHTML = ''
 		document.getElementById('list').appendChild(fragment)
 	}
-	function tabSwitch(type){
+	function tabSwitch(type, offset = 0){
+		type = type == null ? group[document.getElementsByClassName('tab focus')[0].id] + offset : type
+		type = type < 0 ? 0 : type
+		type = type > Object.keys(group).length - 1 ? Object.keys(group).length - 1 : type
 		buildList(type)
+		Array.from(document.getElementById('tabbar').children).forEach(function(element){element.classList.remove('focus')})
 		document.getElementById('tabbar').children[type].classList.add('focus')
-		document.getElementById('tabbar').children[1 - type].classList.remove('focus')
-		history.replaceState({'group': ['nogizaka', 'keyakizaka'][type]}, null, null)
+// 		document.getElementById('tabbar').children[1 - type].classList.remove('focus')
+		history.replaceState({'group': ['nogizaka', 'keyakizaka', 'hinatazaka'][type]}, null, null)
 	}
 	function swipeListener(){
 		var startX, startY, endX, endY
@@ -63,9 +66,9 @@
 		function react(){
 			if(Math.abs(startY - endY) < 80){
 				if(startX - endX > 80)
-					tabSwitch(1)
+					tabSwitch(null, +1)
 				else if(endX - startX > 80)
-					tabSwitch(0)
+					tabSwitch(null, -1)
 			}
 		}
 		element.addEventListener('touchstart',function(event){
@@ -90,6 +93,9 @@
 		document.getElementById('keyakizaka').onclick = function(){
 			tabSwitch(1)
 		}
+		document.getElementById('hinatazaka').onclick = function(){
+			tabSwitch(2)
+		}
 	}
 </script>
 <body>
@@ -100,6 +106,7 @@
 	<div id="tabbar">
 		<div class="tab" id="nogizaka">NOGIZAKA46</div>
 		<div class="tab" id="keyakizaka">KEYAKIZAKA46</div>
+		<div class="tab" id="hinatazaka">HINATAZAKA46</div>
 	</div>
 	<div id="list"></div>
 </body>

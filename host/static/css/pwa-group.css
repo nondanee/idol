@@ -1,3 +1,9 @@
+:root{
+	--nogizakaColor: #9E00A5;
+	--keyakizakaColor: #A0D468;
+	--hinatazakaColor: #5BBEE5;
+}
+
 #topbar>#title{
 	font-size: 18px;
 	font-weight: bold;
@@ -27,17 +33,24 @@
 	height: 2px;
 	width: 6px;
 }
-.tab.focus#keyakizaka{
-	color: #A0D468;
-}
-.tab.focus#keyakizaka::after{
-	background-color: #A0D468;
-}
+
 .tab.focus#nogizaka{
-	color: #9E00A5;
+	color: var(--nogizakaColor);
 }
 .tab.focus#nogizaka::after{
-	background-color: #9E00A5;
+	background-color: var(--nogizakaColor);
+}
+.tab.focus#keyakizaka{
+	color: var(--keyakizakaColor);
+}
+.tab.focus#keyakizaka::after{
+	background-color: var(--keyakizakaColor);
+}
+.tab.focus#hinatazaka{
+	color: var(--hinatazakaColor);
+}
+.tab.focus#hinatazaka::after{
+	background-color: var(--hinatazakaColor);
 }
 .tab:active{
 	background-color: #e6e6e6;

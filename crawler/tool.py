@@ -10,7 +10,7 @@ def get_feed_id(url):
 
     if url.find('nogizaka46') != -1:
         fid = '0' + re.search(r'\d{4}/\d{2}/(\d{6})', url).group(1).zfill(6)
-    elif url.find('keyakizaka46') != -1:
+    elif url.find('keyakizaka46') != -1 or url.find('hinatazaka46') != -1:
         fid = '1' + re.search(r'diary/detail/(\d+)', url).group(1).zfill(6)
     return fid
 

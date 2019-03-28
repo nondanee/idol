@@ -16,7 +16,7 @@ def locate(meta, index, extension, usage):
         photo_dir = os.path.join(host_dir, 'photo', meta['romaji'])
         if not os.path.exists(photo_dir): os.makedirs(photo_dir)
         return os.path.join(photo_dir, '{}-{}-{}.{}'.format(date, meta['feed_id'].zfill(7), str(index).zfill(4), extension))
-      
+
 def transfer(path, name):
 #     subprocess.Popen(['gsutil', 'cp', path, path.replace('../photo/','gs://aidoru-storage/')]).wait()
     response = requests.post(
@@ -28,14 +28,14 @@ def transfer(path, name):
     response = requests.post(
         url = 'https://www.googleapis.com/upload/storage/v1/b/{}/o'.format(secret.storage['bucket_name']),
         params = {'uploadType': 'media', 'name': name},
-        headers = {'Authorization': 'Bearer {}'.format(access_token), 'Content-Type': {'.gif': 'image/gif', '.jpg': 'image/jpeg', '.png': 'image/png'}[os.path.splitext(path)[-1]]}, 
+        headers = {'Authorization': 'Bearer {}'.format(access_token), 'Content-Type': {'.gif': 'image/gif', '.jpg': 'image/jpeg', '.png': 'image/png'}[os.path.splitext(path)[-1]]},
         data = open(path, 'rb').read()
     )
     assert response.status_code == 200
     os.remove(path)
 
 def process(meta, text):
-    
+
     urls_find = re.findall(r'\!\[[^\]]*\]\(([^\)]+)\)', text)
     urls = list(set(urls_find))
     urls.sort(key = urls_find.index)
@@ -87,7 +87,7 @@ def download(url, path):
 
 #     test = requests.get('http://localhost:8080/search?url=' + base64.urlsafe_b64encode(url.encode('utf-8')).decode('utf-8'), allow_redirects = False)
 #     if test.status_code == 302: url = test.headers['location']
-    
+
     if os.path.exists(path): return 1
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'} 
     # proxies = {'http': 'http://127.0.0.1:1080', 'https': 'http://127.0.0.1:1080'}

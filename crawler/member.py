@@ -137,7 +137,6 @@ def get_id(name):
 def get_romaji(name):
     return members[name][1]
 
-
 def identify(author, title):
     
     if author == '３期生':
@@ -205,6 +204,7 @@ def identify(author, title):
             ['松平璃子', '松平璃子'],
             ['森田ひかる', '森田ひかる'],
             ['山﨑天', '山﨑天'],
+            ['山﨑 天', '山﨑天'],
         ]
 
     else:
@@ -219,3 +219,9 @@ def identify(author, title):
             break
 
     return (author, title)
+
+def bind(author, feed_id):
+    if feed_id == '1019921':
+        return '山﨑天'
+    else:
+        return author
