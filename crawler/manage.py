@@ -2,7 +2,7 @@
 
 import sys, argparse
 import capture, database
-    
+
 parser = argparse.ArgumentParser(add_help = False)
 parser.add_argument(
     '--help',

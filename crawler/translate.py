@@ -5,7 +5,7 @@ import requests
 import secret
 
 def baidu_translate(string):
-        
+
     app_id = secret.translate['baidu']['id']
     secret_key = secret.translate['baidu']['key']
     from_lang = 'jp'
@@ -14,9 +14,9 @@ def baidu_translate(string):
     salt = random.randint(32768, 65536)
     salt = 64330
     sign = hashlib.md5('{}{}{}{}'.format(app_id, string, salt, secret_key).encode('utf8')).hexdigest()
-    
-    url = 'http://api.fanyi.baidu.com/api/trans/vip/translate'    
-    
+
+    url = 'http://api.fanyi.baidu.com/api/trans/vip/translate'
+
     query_string = {
         'appid': app_id,
         'q': string,
@@ -25,7 +25,7 @@ def baidu_translate(string):
         'salt': salt,
         'sign': sign
     }
-    
+
     for i in range(5):
         try:
             response = requests.get(url, params = query_string, timeout = 5)
@@ -66,30 +66,30 @@ def youdao_translate(string):
 
 def no_need_translate(text):
     if text in {
-        'っ': '', 
+        'っ': '',
         'ノ': '',
         '年': '',
         '月': '',
         '日': ''
     }:
         return True
-    else: 
+    else:
         return False
 
 def discard_punctuation(text):
-    if text[-1] in {'。': '', '！': '', '？': ''}: 
+    if text[-1] in {'。': '', '！': '', '？': ''}:
         return text[0:-1]
-    else: 
+    else:
         return text
 
 def translate_unit(matched):
     original = matched.group('part')
 
-    if no_need_translate(original): 
+    if no_need_translate(original):
         translation = original
     else:
         translation = baidu_translate(original)
-        # translation = youdao_translate(original) 
+        # translation = youdao_translate(original)
         translation = discard_punctuation(translation)
 
 #     print(original + '\n' + translation + '\n')

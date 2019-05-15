@@ -138,9 +138,9 @@ def get_romaji(name):
     return members[name][1]
 
 def identify(author, title):
-    
+
     if author == '３期生':
-        
+
         rules = [
             ['伊藤々杏', '伊藤理々杏'],
             ['伊藤理々杏', '伊藤理々杏'],
@@ -179,7 +179,7 @@ def identify(author, title):
         ]
 
     elif author == 'けやき坂462期生':
-        
+
         rules = [
             ['金村美玖', '金村美玖'],
             ['河田陽菜', '河田陽菜'],
@@ -207,10 +207,26 @@ def identify(author, title):
             ['山﨑 天', '山﨑天'],
         ]
 
+    elif author == '４期生':
+
+        rules = [
+            ['遠藤さくら', '遠藤さくら'],
+            ['賀喜遥香', '賀喜遥香'],
+            ['掛橋沙耶香', '掛橋沙耶香'],
+            ['金川紗耶', '金川紗耶'],
+            ['北川悠理', '北川悠理'],
+            ['柴田柚菜', '柴田柚菜'],
+            ['清宮レイ', '清宮レイ'],
+            ['田村真佑', '田村真佑'],
+            ['筒井あやめ', '筒井あやめ'],
+            ['早川聖来', '早川聖来'],
+            ['矢久保美緒', '矢久保美緒'],
+        ]
+
     else:
 
         rules = []
-    
+
     for rule in rules:
         if title.find(rule[0]) != -1:
             author = rule[1]
@@ -221,7 +237,13 @@ def identify(author, title):
     return (author, title)
 
 def bind(author, feed_id):
-    if feed_id == '1019921':
-        return '山﨑天'
+
+    correct = {
+        '1019921': '山﨑天',
+        '1028268': '山﨑天'
+    }
+
+    if feed_id in correct:
+        return correct[feed_id]
     else:
         return author

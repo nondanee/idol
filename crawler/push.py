@@ -8,10 +8,10 @@ def firebase(connect, fresh):
     if not fresh: return
     cursor = connect.cursor()
     subscriber = cursor.execute(
-        ''' select end_point 
-            from user 
+        ''' select end_point
+            from user
             where id in (
-                select distinct uid 
+                select distinct uid
                 from subscription
                 where mid in ({})
             )
