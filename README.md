@@ -1,6 +1,6 @@
-<img src="https://user-images.githubusercontent.com/26399680/57981044-44703280-7a65-11e9-986c-b04c28d220bd.png" width="120" height="120" align="right" />
+<img src="https://user-images.githubusercontent.com/26399680/57981044-44703280-7a65-11e9-986c-b04c28d220bd.png" width="144" height="144" align="right" />
 
-# idol ![](https://img.shields.io/badge/python-3.4+-blue.svg)
+# idol ![](https://img.shields.io/badge/python-3.4+-blue.svg?style=flat-square)
 
 Blog content aggregator webapp for Sakamichi46 ◢
 
