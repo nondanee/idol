@@ -52,7 +52,6 @@ Blog from a specific member in post time descending order (Please refer member.t
 Blog from a specific group in post time descending order (Structure of response data is different from the first one)
 
 - `group` nogizaka|keyakizaka
-
 - `size` *ditto*
 - `page` *ditto*
 
