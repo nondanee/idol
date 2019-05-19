@@ -20,13 +20,12 @@ def init(loop):
 
     setup(app, EncryptedCookieStorage(secret_key, max_age = 1296000))
 
-    # app.add_routes([web.static('/static','../static', show_index = True)])
+    # app.add_routes([web.static('/static','../host/static', show_index = True)])
     setup_routes(app)
 
     return app
 
 def main():
-
     # logging.basicConfig(level = logging.DEBUG)
     loop = asyncio.get_event_loop()
 
