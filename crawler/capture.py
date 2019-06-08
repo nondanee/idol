@@ -5,7 +5,7 @@ import member, source, tool, photo, translate, push
 
 def indicator(*args):
     pass
-    print(' '.join(map(str, args)))
+    print(*args)
 
 def nogizaka_only(page = 1):
     blogs = source.from_nogizaka_pc_site(page)

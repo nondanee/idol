@@ -66,18 +66,18 @@ def youdao_translate(string):
 
 def no_need_translate(text):
     if text in {
-        'っ': '',
-        'ノ': '',
-        '年': '',
-        '月': '',
-        '日': ''
+        'っ',
+        'ノ',
+        '年',
+        '月',
+        '日'
     }:
         return True
     else:
         return False
 
 def discard_punctuation(text):
-    if text[-1] in {'。': '', '！': '', '？': ''}:
+    if text[-1] in {'。', '！', '？'}:
         return text[0:-1]
     else:
         return text
