@@ -110,6 +110,8 @@ def download(url, path):
                     url = url.replace('img1.php?id','img2.php?sec_key')
                 elif url.find('/view/') != -1:
                     url = url.replace('/view/','/i/')
+                elif url.find('/v/') != -1:
+                    url = url.replace('/v/','/i/')
                 break
 
     for i in range(10):

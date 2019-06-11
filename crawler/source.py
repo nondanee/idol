@@ -6,11 +6,14 @@ import requests
 
 def fetch(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3509.0 Safari/537.36'}
+    retry = 0
     while True:
         try:
             response = requests.get(url, headers = headers, timeout = 5, proxies = None)
             return response.content
         except Exception as e:
+            retry += 1
+            if retry > 5: raise
             print(e)
 
 def from_keyakizaka_pc_site(page = 1):
