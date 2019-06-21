@@ -33,7 +33,7 @@ def from_keyakizaka_pc_site(page = 1):
 
 def from_hinatazaka_pc_site(page = 1):
     html = fetch('https://www.hinatazaka46.com/s/official/diary/member/list?ima=0000&page={}'.format(page - 1)).decode('utf-8')
-    regexp = re.compile(r'<div class="p-blog-article">[\s|\S]+?<div class="c-blog-article__title">\s*([\s|\S]+?)\s*</div>[\s|\S]+?<div class="c-blog-article__date">\s*([\s|\S]+?)\s*</div>\s*<div class="c-blog-article__name">\s*([\s|\S]+?)\s*</div>[\s|\S]+?<div class="c-blog-article__text">\s*([\s|\S]+?)\s*</div>\s*<div class="p-button__blog_detail">\s*?<a class="c-button-blog-detail" href="([^"]+)"', re.M|re.I)
+    regexp = re.compile(r'<div class="p-blog-article">[\s|\S]+?<div class="c-blog-article__title">\s*([\s|\S]*?)\s*</div>[\s|\S]+?<div class="c-blog-article__date">\s*([\s|\S]+?)\s*</div>\s*<div class="c-blog-article__name">\s*([\s|\S]+?)\s*</div>[\s|\S]+?<div class="c-blog-article__text">\s*([\s|\S]+?)\s*</div>\s*<div class="p-button__blog_detail">\s*?<a class="c-button-blog-detail" href="([^"]+)"', re.M|re.I)
     entries = regexp.findall(html)
     assert len(entries) == 20
     result = []
