@@ -1,11 +1,12 @@
-var scrollDelay
-var loading = false
-
-function resetPage(){
-	history.replaceState({'page': 0, 'more': 1}, null, null)
+const createElement = (tagName, className, innerHTML) => {
+	let element = document.createElement(tagName)
+	if(className) element.className = className
+	if(innerHTML) element.innerHTML = innerHTML
+	return element
 }
 
-function pageScroll(){
+let scrollDelay
+const scrollTop = () => {
 	if(document.documentElement.scrollTop + document.body.scrollTop == 0){
 		clearTimeout(scrollDelay)
 	}
@@ -15,46 +16,21 @@ function pageScroll(){
 	}
 }
 
-function restore(){
-	var target = 1
-	if(history.state != null && history.state.page >= 1){
-		target = history.state.page
-	}
-	resetPage()
-	while(history.state.page < target && history.state.more == 1){
-		loadMore(false)
-	}
-}
-
-window.onload = restore
-window.onbeforeunload = function(){ 
-	if(document.documentElement.scrollTop + window.scrollY == 0){
-		resetPage()
-	}
-}
-
-function loadMore(async){
-	
+let loading = false
+const loadMore = async => {
 	if(loading == true) return
 	else loading = true
 
-	var xhr = new XMLHttpRequest()
-	xhr.onreadystatechange = function(){
+	const xhr = new XMLHttpRequest()
+	xhr.onreadystatechange = () => {
 		if(xhr.readyState == 4){
-			history.state.more = 0
+			history.state.more = false
 			if(xhr.status == 200){
-				var jsonBody= JSON.parse(xhr.responseText)
-				history.state.page = history.state.page + 1
-
-				if(jsonBody.length < 20){
-					history.state.more = 0
-					document.getElementById('loading').className = 'nomore'
-				}
-				else{
-					history.state.more = 1
-					document.getElementById('loading').className = 'goon'
-				}
-				jsonBody.forEach(buildCard)
+				let jsonBody= JSON.parse(xhr.responseText)
+				history.state.page += 1
+				history.state.more = jsonBody.length === 20
+				document.getElementById('loading').className = history.state.more ? 'goon' : 'nomore'
+				jsonBody.forEach(cardify)
 			}
 			history.replaceState(history.state, null, null)
 			loading = 0
@@ -63,100 +39,93 @@ function loadMore(async){
 
 	xhr.open('GET','/api/feed/' + member + '?size=20&page=' + (history.state.page + 1), async)
 	xhr.send()
-
 }
 
-function buildCard(item){
-	var card = createElement('a', 'card')
-	card.href = '/blog/' + item['fid']
+const cardify = item => {
+	let card = createElement('a', 'card')
+	card.href = '/blog/' + item.fid
 
-	var info = createElement('div', 'info')
+	let info = createElement('div', 'info')
 
 	if(member == 'all'){
-		var avatar = info.appendChild(createElement('div', 'avatar'))
+		let avatar = info.appendChild(createElement('div', 'avatar'))
 		avatar.style.backgroundImage = 'url(' + item.author.avatar + ')'
 		info.appendChild(createElement('span', 'author',item.author.name))
 	}
 
-	info.appendChild(createElement('span', 'post', timeFriendly(item.post)))
+	info.appendChild(createElement('span', 'post', timeFormat(item.post)))
 	card.appendChild(info)
 	card.appendChild(createElement('div', 'title', item.title))
 	card.appendChild(createElement('div', 'snippet', item.snippet))
 	document.getElementById('content').appendChild(card)
 }
 
-function createElement(tagName, className, innerHTML){
-	var element = document.createElement(tagName)
-	if(className) element.className = className
-	if(innerHTML) element.innerHTML = innerHTML 
-	return element
-}
 
-function fromNow(date){
-	var now = new Date()
-	var timeDelta = parseInt((Date.now() - date) / 1000)
-	if(timeDelta < 2)
-		return 'just now'
-	else if (timeDelta < 60)
-		return parseInt(timeDelta) + 'secs ago'
-	else if (timeDelta < 120)
-		return '1 min ago'
-	else if (timeDelta < 3600)
-		return parseInt(timeDelta / 60) + ' mins ago'
-	else if (timeDelta < 7200)
-		return '1 hour ago'
-	else
-		return parseInt(timeDelta / 3600) + ' hours ago'
-}
-
-function timeFormat(date){
-	var year = date.getFullYear().toString()
-	var month = (date.getMonth() + 1).toString()
-	var day = date.getDate().toString()
-	var hour = date.getHours().toString()
-	var minute = date.getMinutes()
-	minute = (minute < 10) ? '0'+minute.toString() : minute.toString()
-	var timeinfo = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
-	return timeinfo
-}
-
-function timeFriendly(date){
-	var post = new Date(date)
-	var today = new Date()
+const timeFormat = date => {
+	let post = new Date(date)
+	let today = new Date()
 	today.setHours(0, 0, 0, 0)
-	if (post > today)
-		return fromNow(post)
-	else
-		return timeFormat(post)
+
+	const interval = date => {
+		let delta = parseInt((Date.now() - date) / 1000)
+		if(delta < 2)
+			return 'just now'
+		else if (delta < 60)
+			return parseInt(delta) + 'secs ago'
+		else if (delta < 120)
+			return '1 min ago'
+		else if (delta < 3600)
+			return parseInt(delta / 60) + ' mins ago'
+		else if (delta < 7200)
+			return '1 hour ago'
+		else
+			return parseInt(delta / 3600) + ' hours ago'
+	}
+
+	const time = date => {
+		const stringify = number => ('0' + number).slice(-2)
+		minute = (minute < 10) ? '0'+minute.toString() : minute.toString()
+		return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + stringify(date.getMinutes())
+	}
+
+	return post > today ? interval(post) : time(post)
 }
 
-window.onscroll = function(){
+window.onscroll = () => {
 	if (document.body.scrollHeight - 240 < window.scrollY + window.innerHeight && history.state.more == 1){
 		loadMore(true)
 	}
 }
 
-
-document.getElementById('topbar').onclick = function(){
-	pageScroll()
-}
-if(document.getElementById('member') != null){
-	document.getElementById('member').onclick = function(event){
+document.getElementById('topbar').onclick = scrollTop
+if(document.getElementById('member')){
+	document.getElementById('member').onclick = event => {
 		event.stopPropagation()
 		window.location.href = '/group'
 	}
 }
-if(document.getElementById('about') != null){
-	document.getElementById('about').onclick = function(event){
+if(document.getElementById('about')){
+	document.getElementById('about').onclick = event => {
 		event.stopPropagation()
 		window.location.href = '/about'
 	}
 }
-if(document.getElementById('back') != null){
-	document.getElementById('back').onclick = function(event){
+if(document.getElementById('back')){
+	document.getElementById('back').onclick = event => {
 		event.stopPropagation()
 		history.back(-1) | window.close()
 	}
+}
+
+window.onload = () => {
+	let target = (history.state || {}).page >= 1 ? history.state.page : 1
+	history.replaceState({page: 1, more: true}, null, null)
+	while(history.state.page < target && history.state.more){
+		loadMore(false)
+	}
+}
+window.onbeforeunload = () => {
+	if(document.documentElement.scrollTop + window.scrollY == 0) history.replaceState(null, null, null)
 }
 
 
@@ -176,19 +145,19 @@ if('serviceWorker' in navigator){
 // }
 
 // function setflag(){
-// 	var date = new Date()
-// 	var timestamp = date.getTime()
+// 	let date = new Date()
+// 	let timestamp = date.getTime()
 // 	date.setDate(date.getDate() + 1)
 // 	document.cookie = 'LAST_SUBSCRIBE=' +escape(timestamp)+';expires='+date.toGMTString()
 // }
 
 
 // function checkflag(){
-// 	var start_index = document.cookie.indexOf('LAST_SUBSCRIBE=')
+// 	let start_index = document.cookie.indexOf('LAST_SUBSCRIBE=')
 // 	if (start_index == -1){return 0}
-// 	var last_subscribe = unescape(document.cookie.substring(start_index + 15,start_index + 28))
-// 	var date = new Date()
-// 	var timestamp = date.getTime()
+// 	let last_subscribe = unescape(document.cookie.substring(start_index + 15,start_index + 28))
+// 	let date = new Date()
+// 	let timestamp = date.getTime()
 // 	// date.setTime(last_subscribe)
 // 	// console.log(date)
 // 	if ((timestamp - last_subscribe)< 1000 * 60 * 30){return 1}
@@ -202,8 +171,8 @@ if('serviceWorker' in navigator){
 // 			if(status === 'granted') {
 // 				registration.pushManager.getSubscription().then(function(subscribed) {
 // 					registration.pushManager.subscribe({userVisibleOnly: true}).then(function(subscription) {
-// 						var endpointSections = subscription.endpoint.split('/')
-// 						var subscriptionId = endpointSections[endpointSections.length - 1]
+// 						let endpointSections = subscription.endpoint.split('/')
+// 						let subscriptionId = endpointSections[endpointSections.length - 1]
 // 						// console.log('subscriptionId:', subscriptionId)
 // 						if (checkflag()==0||subscribed==null){
 // 							fetch('/push/sub',
