@@ -9,7 +9,7 @@ def route(request):
     query_string = request.rel_url.query
     page, size = tool.paging_parse(query_string)
     condition = ''
-    
+
     if 'member' in query_string:
         if re.search(r'^[a-z|-]+$', query_string['member']):
             condition = 'and member.romaji = "{}"'.format(query_string['member'])
@@ -24,7 +24,7 @@ def route(request):
 
     with (yield from request.app['pool']) as connect:
 
-        cursor = yield from connect.cursor() 
+        cursor = yield from connect.cursor()
 
         yield from cursor.execute('''
             select

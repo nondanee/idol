@@ -31,7 +31,7 @@ def route(request):
             cut.romaji,
             favor.uid
             from(
-                select 
+                select
                 feed.id,
                 feed.post,
                 feed.mid,
@@ -42,8 +42,8 @@ def route(request):
                 member.romaji
                 from feed, member
                 where feed.mid = (
-                    select 
-                    feed.mid 
+                    select
+                    feed.mid
                     from feed
                     where feed.id = %s
                 )

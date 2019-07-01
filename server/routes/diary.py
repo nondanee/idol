@@ -131,7 +131,7 @@ def legacy(request):
             },
             'title': [data[5], data[7]],
             'article': [
-                tool.photo_locate(data[3], data[0], fid, data[6]), 
+                tool.photo_locate(data[3], data[0], fid, data[6]),
                 tool.photo_locate(data[3], data[0], fid, data[8])
             ],
             'link': data[4]

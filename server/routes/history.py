@@ -17,10 +17,10 @@ def route(request):
             history.last_update
             from member
             left join (
-                select 
+                select
                 mid,
                 max(post) as last_update
-                from feed 
+                from feed
                 group by mid
             ) history
             on member.id = history.mid

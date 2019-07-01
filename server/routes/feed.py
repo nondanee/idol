@@ -19,7 +19,7 @@ def all(request):
 
     with (yield from request.app['pool']) as connect:
 
-        cursor = yield from connect.cursor() 
+        cursor = yield from connect.cursor()
 
         yield from cursor.execute('''
             select
@@ -99,7 +99,7 @@ def follow(request):
 
     with (yield from request.app['pool']) as connect:
 
-        cursor = yield from connect.cursor() 
+        cursor = yield from connect.cursor()
 
         yield from cursor.execute('''
             select
@@ -126,7 +126,7 @@ def follow(request):
                 member.name
                 from feed, member
                 where feed.mid in (
-                    select 
+                    select
                     mid
                     from follow
                     where uid = %s
@@ -184,7 +184,7 @@ def favor(request):
 
     with (yield from request.app['pool']) as connect:
 
-        cursor = yield from connect.cursor() 
+        cursor = yield from connect.cursor()
 
         yield from cursor.execute('''
             select
@@ -211,11 +211,11 @@ def favor(request):
                 member.name
                 from feed, member
                 where feed.id in (
-                    select 
+                    select
                     fid
                     from favor
                     where uid = %s
-                ) 
+                )
                 and feed.mid = member.id
                 order by feed.post desc, feed.mid desc
                 limit %s, %s
@@ -276,7 +276,7 @@ def member(request):
 
     with (yield from request.app['pool']) as connect:
 
-        cursor = yield from connect.cursor() 
+        cursor = yield from connect.cursor()
 
         yield from cursor.execute('''
             select
