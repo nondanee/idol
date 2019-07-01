@@ -19,7 +19,7 @@ Blog content aggregator webapp for Sakamichi46 ◢
 - Text data and API service are hosted on Vultr VC2
 - Photos are stored in Google cloud storage
 
-> Finding sponsors and maintainers
+> Looking for sponsors and maintainers
 
 ## Quick start
 
