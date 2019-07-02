@@ -84,7 +84,6 @@ const timeFormat = date => {
 
 	const time = date => {
 		const stringify = number => ('0' + number).slice(-2)
-		minute = (minute < 10) ? '0'+minute.toString() : minute.toString()
 		return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + stringify(date.getMinutes())
 	}
 
@@ -119,7 +118,7 @@ if(document.getElementById('back')){
 
 window.onload = () => {
 	let target = (history.state || {}).page >= 1 ? history.state.page : 1
-	history.replaceState({page: 1, more: true}, null, null)
+	history.replaceState({page: 0, more: true}, null, null)
 	while(history.state.page < target && history.state.more){
 		loadMore(false)
 	}
