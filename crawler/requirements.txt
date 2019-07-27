@@ -1,3 +1,4 @@
 Pillow
 PyMySQL
 requests
+sentry-sdk

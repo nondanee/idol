@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import sys, argparse
-import capture, database
+import capture, database, secret
+import sentry_sdk
+sentry_sdk.init(secret.sentry['dsn'])
 
 parser = argparse.ArgumentParser(add_help = False)
 parser.add_argument(
