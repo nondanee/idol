@@ -1,0 +1,20 @@
+aidoru.tk
+tls ../ssl/cert.pem ../ssl/key.pem
+
+root ../host
+ext .html
+#header / -Server
+log /api ../log/caddy.log
+log /blog ../log/caddy.log
+rewrite /member/ {
+	to /member 
+}
+proxy /blog http://127.0.0.1:8080 {
+	header_upstream Host {host}
+	header_upstream X-Real-IP {remote}
+}
+proxy /api http://127.0.0.1:8080 {
+	without /api
+	header_upstream Host {host}
+	header_upstream X-Real-IP {remote}
+}

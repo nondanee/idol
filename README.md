@@ -27,7 +27,7 @@ Blog content aggregator webapp for Sakamichi46 ◢
 2. Install dependency for server and crawler by the corresponding `requirements.txt`
 3. Create new database and execute table creating SQL and fill member information by the file in `init/` directory
 4. You can run `python crawler/manage.py -h` for arguments about crawling and run `python server/main.py` to start API server
-5. You will need Nginx to host static files in `host/` directory, and a process management tool to keep server always run. In the `config/` directory, there are nginx and supervisor configuration examples for reference
+5. You will need nginx or caddy to host static files in `host/` directory, and a process management tool to keep API server always run. In the `config/` directory, there are nginx, caddy and supervisor configuration examples for reference
 
 ## Public API
 
