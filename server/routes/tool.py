@@ -43,7 +43,7 @@ def photo_locate(romaji, post, fid, text):
         size = matched.group(1)
         name = matched.group(2).split('.')
         name[0] = name[0].zfill(4)
-        return '![{}]({}/{}/{}-{}-{})'.format(size, 'https://storage.aidoru.tk', romaji, post.strftime('%Y%m%d'), str(fid).zfill(7), '.'.join(name))    
+        return '![{}]({}/{}/{}-{}-{})'.format(size, 'https://cdn.aidoru.tk', romaji, post.strftime('%Y%m%d'), str(fid).zfill(7), '.'.join(name))
     return re.sub(r'\!\[([^\]]*)\]\(([^\)]+)\)', substitution, text)
 
 def paging_parse(query_string):
