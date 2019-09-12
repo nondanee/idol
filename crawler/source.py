@@ -69,7 +69,8 @@ def from_nogizaka_rss():
     #assert len(entries) == 15
     result = []
     for entry in entries:
-        title = entry.getElementsByTagName('title')[0].firstChild.data
+        title = entry.getElementsByTagName('title')[0].firstChild
+        title = title.data if title else ''
         link = entry.getElementsByTagName('link')[0].getAttribute('href')
         author = entry.getElementsByTagName('author')[0].getElementsByTagName('name')[0].firstChild.data
         utc = datetime.datetime.strptime(entry.getElementsByTagName('published')[0].firstChild.data, '%Y-%m-%dT%H:%M:%SZ')
