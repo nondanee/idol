@@ -12,6 +12,7 @@
 }
 #topbar>button#member{
 	background-image: url(/static/image/ic_member.png);
+	margin-left: auto;
 }
 #topbar>button#about{
 	background-image: url(/static/image/ic_about.png);

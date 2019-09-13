@@ -31,33 +31,30 @@ body{
 }
 
 .cell{
-	position: relative;
+	display: flex;
+	text-decoration: none;
 	padding: 10px 16px;
 	border-bottom: 1px solid #efefef;
 	background-color: #ffffff;
+	font-size: 16px;
+	color: #333333;
+	align-items: center;
+	justify-content: space-between;
+	line-height: 24px;
 }
-.cell:nth-child(3){
+.cell:first-of-type{
 	border-top: 1px solid #efefef;
-	color: red;
 }
 .cell:active{
 	background-color: #ececec;
 }
-.cell label{
-	font-size: 16px;
-	color: #333333;
-}
-
-.cell access{
-	display: inline-block;
+.cell::after{
+	content: "";
 	height: 6px;
 	width: 6px;
 	border-width: 2px 2px 0 0;
 	border-color: #c8c8cd;
 	border-style: solid;
-	transform:rotate(45deg);
-	position: absolute;
-	top: 50%;
-	margin-top: -4px;
-	right: 16px;
+	transform: rotate(45deg);
+	margin-right: 2px;
 }

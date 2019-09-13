@@ -158,7 +158,6 @@ template = '''
 <body>
     <div id="topbar">
         <button id="back"></button>
-        <div class="fill"></div>
         <button id="translate"></button>
         <button id="link"></button>
     </div>

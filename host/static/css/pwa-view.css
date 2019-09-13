@@ -32,10 +32,6 @@ body{
 		transform: translateY(0px);
 	}
 }
-.fill{
-	flex-grow: 1;
-	pointer-events: none;
-}
 button{
 	border: 0;
 	padding: 0;
@@ -68,6 +64,7 @@ button:active::before{
 }
 button#translate{
 	background-image: url(/static/image/ic_translate.png);
+	margin-left: auto;
 }
 button#link{
 	background-image: url(/static/image/ic_link.png);

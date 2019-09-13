@@ -19,7 +19,6 @@
 			<div id="name"></div>
 			<div id="romaji"></div>
 		</div>
-		<div class="fill"></div>
 		<div id="avatar"></div>
 	</div>
 	<div id="content"></div>
@@ -27,15 +26,15 @@
 </body>
 <script src="/static/js/list.js"></script>
 <script>
-	var id = window.location.href.split('member/').pop()
-	var member = 'member/' + id
+	const id = window.location.href.split('member/').pop()
+	const member = 'member/' + id
 	if(id in members){
-		var name = members[id][0]
-		var romaji = members[id][1]
+		let name = members[id][0]
+		let romaji = members[id][1]
 		document.title = name + ' | idol'
 		document.getElementById('name').innerHTML = name
 		document.getElementById('romaji').innerHTML = romaji.replace(/-/g, ' ')
-		document.getElementById('avatar').style.backgroundImage = 'url(' + '/avatar/' + romaji + '.jpg' + ')'
+		document.getElementById('avatar').style.backgroundImage = `url(/avatar/${romaji}.jpg)`
 	}
 </script>
 <script src="/static/js/main.js"></script>

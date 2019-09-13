@@ -18,42 +18,18 @@
 	<div class="info">
 		<div id="logo"></div>
 		<div id="version">
-			V20190415<br>
+			V20190913<br>
 			<small>Google Cloud Platform 也太贵了吧</small>
 		</div>
 	</div>
-<!-- 	<div class="cell">
-		<label>PWA的正确使用姿势</label><access></access>
-	</div> -->
-	<div class="cell">
-		<label>乃木坂46 公式ブログ</label><access></access>
-	</div>
-	<div class="cell">
-		<label>欅坂46 公式ブログ</label><access></access>
-	</div>
-	<div class="cell">
-		<label>日向坂46 公式ブログ</label><access></access>
-	</div>
-	<div class="cell">
-		<label>联系开发者</label><access></access>
-	</div>
+<!-- 	<a class="cell">PWA的正确使用姿势</a> -->
+	<a class="cell" href="http://blog.nogizaka46.com/">乃木坂46 公式ブログ</a>
+	<a class="cell" href="http://www.keyakizaka46.com/s/k46o/diary/member/list?site=k46o&ima=0000">欅坂46 公式ブログ</a>
+	<a class="cell" href="https://www.hinatazaka46.com/s/official/diary/member/list?ima=0000">日向坂46 公式ブログ</a>
+	<a class="cell" href="https://github.com/nondanee">联系开发者</a>
 </body>
 <script type="text/javascript">
-	document.getElementById('back').onclick = function(){
-		history.back(-1) | window.close()
-	}
-	document.getElementsByClassName('cell')[0].onclick = function() {
-		window.location.href = 'http://blog.nogizaka46.com/'
-	}
-	document.getElementsByClassName('cell')[1].onclick = function() {
-		window.location.href = 'http://www.keyakizaka46.com/s/k46o/diary/member/list?site=k46o&ima=0000'
-	}
-	document.getElementsByClassName('cell')[2].onclick = function() {
-		window.location.href = 'https://www.hinatazaka46.com/s/official/diary/member/list?ima=0000'
-	}
-	document.getElementsByClassName('cell')[3].onclick = function() {
-		window.location.href = 'https://github.com/nondanee'
-	}
+	document.getElementById('back').onclick = () => (history.back(-1) | window.close())
 </script>
 </html>
 

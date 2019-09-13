@@ -37,7 +37,7 @@ const loadMore = async => {
 		}
 	}
 
-	xhr.open('GET','/api/feed/' + member + '?size=20&page=' + (history.state.page + 1), async)
+	xhr.open('GET','/api/v3/feed/' + member + '?size=20&page=' + (history.state.page + 1), async)
 	xhr.send()
 }
 
