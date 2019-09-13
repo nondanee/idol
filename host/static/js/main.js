@@ -12,7 +12,7 @@ const scrollTop = () => {
 	}
 	else{
 		window.scrollBy(0, -70)
-		scrollDelay = setTimeout(pageScroll, 10)
+		scrollDelay = setTimeout(scrollTop, 10)
 	}
 }
 
@@ -37,7 +37,7 @@ const loadMore = async => {
 		}
 	}
 
-	xhr.open('GET','/api/v3/feed/' + member + '?size=20&page=' + (history.state.page + 1), async)
+	xhr.open('GET', `/api/v3/feed/${member}?size=20&page=${history.state.page + 1}`, async)
 	xhr.send()
 }
 
@@ -50,7 +50,7 @@ const cardify = item => {
 	if(member == 'all'){
 		let avatar = info.appendChild(createElement('div', 'avatar'))
 		avatar.style.backgroundImage = 'url(' + item.author.avatar + ')'
-		info.appendChild(createElement('span', 'author',item.author.name))
+		info.appendChild(createElement('span', 'author', item.author.name))
 	}
 
 	info.appendChild(createElement('span', 'post', timeFormat(item.post)))
