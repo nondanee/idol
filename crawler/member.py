@@ -134,7 +134,10 @@ members = {
     '松田好花': ['2207', 'matsuda-konoka'],
     '宮田愛萌': ['2208', 'miyata-manamo'],
     '渡邉美穂': ['2209', 'watanabe-miho'],
-    '上村ひなの': ['2301', 'kamimura-hinano']
+    '上村ひなの': ['2301', 'kamimura-hinano'],
+    '髙橋未来虹': ['2302', 'takahashi-mikuni'],
+    '森本茉莉': ['2303', 'morimoto-marii'],
+    '山口陽世': ['2304', 'yamaguchi-haruyo'],
 }
 
 def get_id(name):
@@ -241,6 +244,14 @@ def identify(author, title):
             ['守屋麗奈', '守屋麗奈'],
         ]
 
+    elif author == '日向坂46新三期生':
+
+        rules = [
+            ['髙橋 未来虹', '髙橋未来虹'],
+            ['森本 茉莉', '森本茉莉'],
+            ['山口 陽世', '山口陽世'],
+        ]
+
     else:
 
         rules = []
@@ -259,7 +270,8 @@ def bind(author, feed_id):
     correct = {
         '1019921': '山﨑天',
         '1028268': '山﨑天',
-        '0054642': '北川悠理'
+        '0054642': '北川悠理',
+        '1033182': '髙橋未来虹'
     }
 
     if feed_id in correct:

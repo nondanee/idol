@@ -100,5 +100,8 @@ const members = {
 	'2207': ['松田好花', 'matsuda-konoka'],
 	'2208': ['宮田愛萌', 'miyata-manamo'],
 	'2209': ['渡邉美穂', 'watanabe-miho'],
-	'2301': ['上村ひなの', 'kamimura-hinano']
+	'2301': ['上村ひなの', 'kamimura-hinano'],
+	'2302': ['髙橋未来虹', 'takahashi-mikuni'],
+    '2303': ['森本茉莉', 'morimoto-marii'],
+    '2304': ['山口陽世', 'yamaguchi-haruyo'],
 }

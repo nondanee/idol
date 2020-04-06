@@ -128,3 +128,6 @@
 2208	宮田愛萌	みやた まなも	miyata-manamo
 2209	渡邉美穂	わたなべ みほ	watanabe-miho
 2301	上村ひなの	かみむら ひなの	kamimura-hinano
+2302	髙橋未来虹	たかはし みくに	takahashi-mikuni
+2303	森本茉莉	もりもと まりぃ	morimoto-marii
+2304	山口陽世	やまぐち はるよ	yamaguchi-haruyo
