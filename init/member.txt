@@ -99,6 +99,12 @@
 1207	松平璃子	まつだいら りこ	matsudaira-riko
 1208	森田ひかる	もりた ひかる	morita-hikaru
 1209	山﨑天	やまさき てん	yamasaki-ten
+1210	遠藤光莉	えんどう ひかり	endo-hikari
+1211	大園玲	おおぞの れい	ozono-rei
+1212	大沼晶保	おおぬま あきほ	onuma-akiho
+1213	幸阪茉里乃	こうさか まりの	kousaka-marino
+1214	増本綺良	ますもと きら	masumoto-kira
+1215	守屋麗奈	もりや れな	moriya-rena
 
 
 2101	井口眞緒	いぐち まお	iguchi-mao
