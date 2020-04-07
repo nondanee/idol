@@ -7,38 +7,34 @@ def indicator(*args):
     pass
     print(*args)
 
+def sort(data):
+    data.sort(key = operator.itemgetter(0), reverse = False)
+    return data
+
 def nogizaka_only(page = 1):
     blogs = source.from_nogizaka_pc_site(page)
-    blogs.sort(key = operator.itemgetter(0), reverse = False)
-    return blogs
+    return sort(blogs)
 
 def keyakizaka_only(page = 1):
     blogs = source.from_keyakizaka_pc_site(page)
-    blogs.sort(key = operator.itemgetter(0), reverse = False)
-    return blogs
+    return sort(blogs)
 
 def hinatazaka_only(page = 1):
     blogs = source.from_hinatazaka_pc_site(page)
-    blogs.sort(key = operator.itemgetter(0), reverse = False)
-    return blogs
+    return sort(blogs)
 
 def all():
     blogs = source.from_keyakizaka_pc_site()
     blogs += source.from_nogizaka_rss()
     blogs += source.from_hinatazaka_pc_site()
-    blogs.sort(key = operator.itemgetter(0), reverse = False)
-    return blogs
+    return sort(blogs)
 
 def deal(connect, blogs):
     fresh = []
     cursor = connect.cursor()
     for blog in blogs:
 
-        post = blog[0]
-        author = blog[1]
-        title = blog[2]
-        html = blog[3]
-        url = blog[4]
+        post, author, title, html, url = blog
 
         feed_id = tool.get_feed_id(url)
         if cursor.execute('select * from feed where id = %s', (feed_id,)) != 0: continue
@@ -49,7 +45,7 @@ def deal(connect, blogs):
         snippet = tool.clip_text(text)
 
         author = member.bind(author, feed_id)
-        author, title = member.identify(author, title)
+        author, title = member.identify(author, title, text)
 
         member_id = member.get_id(author)
         romaji = member.get_romaji(author)
@@ -64,7 +60,7 @@ def deal(connect, blogs):
             connect.commit()
             indicator('list save')
 
-        (text, thumbnail, images) = photo.process({'feed_id': feed_id, 'romaji': romaji,'post': post}, text)
+        text, thumbnail, images = photo.process({'feed_id': feed_id, 'romaji': romaji, 'post': post}, text)
 
         try:
             cursor.executemany('insert into photo values({}, %s, %s, %s, %s, %s, %s)'.format(feed_id), images)

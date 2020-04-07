@@ -146,7 +146,7 @@ def get_id(name):
 def get_romaji(name):
     return members[name][1]
 
-def identify(author, title):
+def identify(author, title, text):
 
     if author == '３期生':
 
@@ -247,9 +247,9 @@ def identify(author, title):
     elif author == '日向坂46新三期生':
 
         rules = [
-            ['髙橋 未来虹', '髙橋未来虹'],
-            ['森本 茉莉', '森本茉莉'],
-            ['山口 陽世', '山口陽世'],
+            ['髙橋未来虹', '髙橋未来虹'],
+            ['森本茉莉', '森本茉莉'],
+            ['山口陽世', '山口陽世'],
         ]
 
     else:
@@ -257,13 +257,18 @@ def identify(author, title):
         rules = []
 
     for rule in rules:
-        if title.find(rule[0]) != -1:
+        if rule[0] in title:
             author = rule[1]
             title = re.sub(rule[0], '', title)
             title = re.sub(r'[\xa0|\s]*$', '', title)
             break
 
-    return (author, title)
+    for rule in rules:
+        if rule[0] in text[0:200]:
+            author = rule[1]
+            break
+
+    return author, title
 
 def bind(author, feed_id):
 
