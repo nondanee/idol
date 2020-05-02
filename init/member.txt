@@ -66,6 +66,11 @@
 0409	筒井あやめ	つつい あやめ	tsutsui-ayame
 0410	早川聖来	はやかわ せいら	hayakawa-seira
 0411	矢久保美緒	やくぼ みお	yakubo-mio
+0412	黒見明香	くろみ はるか	kuromi-haruka
+0413	佐藤璃果	さとう りか	satou-rika
+0414	林瑠奈	はやし るな	hayashi-runa
+0415	松尾美佑	まつお みゆ	matsuo-miyu
+0416	弓木奈於	ゆみき なお	yumiki-nao
 
 
 1101	石森虹花	いしもり にじか	ishimori-nijika
