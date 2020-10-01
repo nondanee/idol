@@ -108,3 +108,18 @@ def from_nogizaka_pc_site_single(url):
         text = entry[2]
         result.append([post, author, title, text, link])
     return result
+
+def from_hinatazaka_pc_site_single(url):
+    html = fetch(url).decode('utf-8')
+    regexp = re.compile(r'<div class="p-blog-article">[\s|\S]+?<div class="c-blog-article__title">\s*([\s|\S]*?)\s*</div>[\s|\S]+?<div class="c-blog-article__date">\s*<time>\s*([\s|\S]+?)\s*</time>\s*</div>\s*<div class="c-blog-article__name">\s*<a[^>]+?>\s*([\s|\S]+?)\s*</a>\s*</div>[\s|\S]+?<div class="c-blog-article__text">\s*([\s|\S]+?)\s*</div>\s*</div>\s*</div>\s*<div class="p-pager">', re.M|re.I)
+    entries = regexp.findall(html)
+    assert len(entries) == 1
+    result = []
+    for entry in entries:
+        author = entry[2].replace(' ', '')
+        link = url
+        post = datetime.datetime.strptime(entry[1], '%Y.%m.%d %H:%M').strftime('%Y/%m/%d %H:%M')
+        title = entry[0]
+        text = entry[3]
+        result.append([post, author, title, text, link])
+    return result
